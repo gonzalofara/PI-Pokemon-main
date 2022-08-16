@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 
+
 module.exports = (sequelize) => {
     sequelize.define('Type', {
         typeID: {
@@ -16,3 +17,4 @@ module.exports = (sequelize) => {
         timestamps: false
     });
 }
+
