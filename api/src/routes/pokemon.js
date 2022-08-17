@@ -7,10 +7,10 @@ const { Op } = require('sequelize');
 
 router.post('/', async (req, res) => {
 
-    const {name, health, attack, deffense, speed, height, weight} = req.body;
+    const {name, health, attack, defense, speed, height, weight} = req.body;
     try {
         const newPokemon = await Pokemon.create({
-            name: name, health: health, attack: attack, deffense: deffense, speed: speed, height: height, weight: weight
+            name: name, health: health, attack: attack, defense: defense, speed: speed, height: height, weight: weight
         })
         
         console.log(newPokemon.toJSON());
@@ -30,9 +30,13 @@ router.get('/', async (req, res) => {
             const dbPokemon = await Pokemon.findOne({
                 where: {
                     name: {
-                        [Op.iLike] : name
-                    }
-                }
+                      [Op.iLike]: `%${name}%`,
+                    },
+                  },
+                  include: {
+                    model: Type,
+                    attributes: ['name'],
+                  }
             });
 
             if(dbPokemon) return res.status(200).json(dbPokemon);
@@ -61,9 +65,19 @@ router.get('/', async (req, res) => {
         
         try {
 
-            const dbPokemons = await Pokemon.findAll({
-                attributes: ['pokeID', 'name', 'image']
-            });
+            const dbPokemons = await Pokemon.findAll(
+                {
+                    attributes: ['pokeID', 'name', 'image']
+                },
+                {
+                    include: {
+                        model: Type,
+                        attributes: ["name"],
+                        through: {
+                            attributes: [],
+                        }
+                }}
+            );
             
             let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40&offset=0');
             apiPromise = apiPromise.data.results?.map(pokemon => axios.get(pokemon.url));
@@ -91,7 +105,7 @@ router.get('/:idPokemon', async (req, res) => {
 
     if(idPokemon.length > 4) {
         try {
-            const dbPokemonID = await Pokemon.findByPk(idPokemon)
+            const dbPokemonID = await Pokemon.findByPk(idPokemon, { include: [Type] });
             if(dbPokemonID !== null) return res.status(200).json(dbPokemonID);
         } catch (error) {
             return res.status(404).send('No se encontró un Pokemon con ese ID')
