@@ -52,6 +52,7 @@ router.get('/', async (req, res) => {
                 speed: apiPokemon.data.stats[5].base_stat,
                 height: apiPokemon.data.height,
                 weight: apiPokemon.data.weight,
+                // types: apiPokemon.data.types.map(t => t.type.name),
                 image: apiPokemon.data.sprites.front_default,
             };
 
