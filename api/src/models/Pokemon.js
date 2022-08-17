@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
     attack: {
       type: DataTypes.INTEGER
     },
-    deffense: {
+    defense: {
       type: DataTypes.INTEGER
     },
     speed: {
@@ -34,7 +34,8 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER
     }, 
     image: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      defaultValue: "https://www.pngwing.com/en/free-png-bckje"
     }
   },
   {
