@@ -5,9 +5,14 @@ const axios = require('axios');
 
 router.get('/', async (req,res) => {
 
+
+    
     try {
         const apiPromise = await axios.get('https://pokeapi.co/api/v2/type')
-        const apiResponse = apiPromise.data.results.map(t => t.name);
+        const apiResponse = apiPromise.data.results.filter(t => {
+            return { name: t.name !== 'unknown'}
+        
+        });
 
         const typeExists = await Type.findAll();
         if(typeExists.length > 1) {

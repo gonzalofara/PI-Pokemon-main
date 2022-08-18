@@ -32,7 +32,11 @@ module.exports = (sequelize) => {
     },
     weight: {
       type: DataTypes.INTEGER
-    }, 
+    },
+    type: {
+      type: DataTypes.STRING,
+      defaultValue: 'unknown'
+    },
     image: {
       type: DataTypes.STRING,
       defaultValue: "https://www.pngwing.com/en/free-png-bckje"

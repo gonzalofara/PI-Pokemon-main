@@ -4,7 +4,6 @@ const { Pokemon, Type } = require('../db');
 const axios = require('axios');
 const { Op } = require('sequelize');
 
-
 router.post('/', async (req, res) => {
 
     const {name, health, attack, defense, speed, height, weight} = req.body;
@@ -52,7 +51,7 @@ router.get('/', async (req, res) => {
                 speed: apiPokemon.data.stats[5].base_stat,
                 height: apiPokemon.data.height,
                 weight: apiPokemon.data.weight,
-                types: apiPokemon.data.types.map(t => t.type.name), //capitalizar
+                type: apiPokemon.data.types[0].type.name, //capitalizar
                 image: apiPokemon.data.sprites.front_default,
             };
 
@@ -124,6 +123,7 @@ router.get('/:idPokemon', async (req, res) => {
             speed: apiPokemonID.data.stats[5].base_stat,
             height: apiPokemonID.data.height,
             weight: apiPokemonID.data.weight,
+            type: apiPokemonID.data.types[0].type.name,
             image: apiPokemonID.data.sprites.front_default,
         };
 
@@ -133,13 +133,6 @@ router.get('/:idPokemon', async (req, res) => {
         res.status(404).send('No se encontró un Pokemon con ese ID')
     }
 })
-
-
-
-
-    
-
-
 
 
 module.exports = router;
