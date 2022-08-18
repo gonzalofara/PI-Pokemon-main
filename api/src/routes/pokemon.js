@@ -45,14 +45,14 @@ router.get('/', async (req, res) => {
 
             const matchedPokemon = {
                 pokeID: apiPokemon.data.id,
-                name: apiPokemon.data.forms[0].name,
+                name: apiPokemon.data.forms[0].name,    //capitalizar
                 health: apiPokemon.data.stats[0].base_stat,
                 attack: apiPokemon.data.stats[1].base_stat,
                 defense: apiPokemon.data.stats[2].base_stat,
                 speed: apiPokemon.data.stats[5].base_stat,
                 height: apiPokemon.data.height,
                 weight: apiPokemon.data.weight,
-                // types: apiPokemon.data.types.map(t => t.type.name),
+                types: apiPokemon.data.types.map(t => t.type.name), //capitalizar
                 image: apiPokemon.data.sprites.front_default,
             };
 
