@@ -8,26 +8,29 @@ router.post('/', async (req, res) => {
 
     const {name, health, attack, defense, speed, height, weight, image} = req.body;
     let {types} = req.body;
-    if(!types) types = ['unknown'];
+    !types ? types = ['unknown'] : [...types];
+    
 
     try {
 
-        const exists = await Pokemon.findOne({ where: { name: name}})
-        if(exists) return res.status(200).send(`Ya existe un Pokemon con ese nombre`);
+        const exists = await Pokemon.findOne({ where: { name: name.trim().toLowerCase()}})
+        if(exists) return res.status(400).send(`Ya existe un Pokemon con ese nombre`);
 
         const newPokemon = await Pokemon.create({
-            name, health, attack, defense, speed, height, weight, image
+            name: name.trim().toLowerCase(), health, attack, defense, speed, height, weight, image
         });
 
         let assignTypes = await Promise.all(
-            types.map((el) => Type.findOne({ where: { name: el } }))
+            types.map(t => Type.findOne({ where: { name: t } }))
         )
       
           newPokemon.setTypes(assignTypes);
         // console.log(newPokemon.toJSON());
-        return res.status(200).json(newPokemon);
+
+        //201 -> Created
+        return res.status(201).json([ `El Pokemon: ${newPokemon.name[0].toUpperCase() + newPokemon.name.substring(1)} ha sido creado correctamente.`, newPokemon]);
     } catch (error) {
-        return res.status(400).send('Ha ocurrido un error. El Pokemon no pudo ser creado')
+        return res.status(400).json('Ha ocurrido un error. El Pokemon no pudo ser creado')
     }
 })
 
@@ -51,7 +54,7 @@ router.get('/', async (req, res) => {
             const dbPokemonFormat = dbPokemon.map(p=>{
                 return {
                     id: p.id,
-                    name: p.name,
+                    name: p.name.trim().toLowerCase().charAt(0).toUpperCase() + p.name.substring(1),
                     health: p.health,
                     attack: p.attack,
                     defense: p.defense,
@@ -178,7 +181,7 @@ router.get('/:idPokemon', async (req, res) => {
     } catch (error) {
         res.status(404).send('No se encontró un Pokemon con ese ID')
     }
-})
+});
 
 
 module.exports = router;
