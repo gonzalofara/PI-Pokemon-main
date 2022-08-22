@@ -1,8 +1,4 @@
 .pokeball {
-    /* display:flex; */
-    /* justify-content: center; */
-    /* align-items:center; */
-    
     background: url('../resources/pokeball.gif');
     background-repeat: no-repeat;
     background-position: center center;

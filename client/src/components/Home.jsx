@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getAllPokemons} from '../redux/actions/actions';
 import Card from './Card.jsx';
 import Loading from './Loading';
+import Nav from './Nav';
 
 const Home = () => {
 
@@ -17,6 +18,7 @@ const Home = () => {
   return (
     <div>
       Home
+      <Nav />
       {allPokemons.length > 0 ? allPokemons.map(p => 
         (
           <div key={p.id}>
