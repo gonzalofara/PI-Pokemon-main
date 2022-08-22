@@ -1,6 +1,6 @@
 const axios = require('axios');
 
- export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
+export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_TYPES = 'GET_POKEMON_TYPES';
@@ -43,7 +43,6 @@ export const createPokemon = (pokemon) => {
     try {
         return function(dispatch) {
             return axios.post('http://localhost:3001/pokemons', pokemon)
-                .then( 'Pokemon creado', console.log(pokemon))
         }
     } catch (error) {
         'Ha ocurrido un error, intenta nuevamente.'
@@ -85,6 +84,7 @@ export const getPokemonTypes = () => {
 //     }
     
 // }
+////PRUEBA GET_POKEMON_ID    
 //   const getPokemonById = (id) => {
 //     try {
 //         axios.get(`http://localhost:3001/pokemons/${id}`)
@@ -95,7 +95,7 @@ export const getPokemonTypes = () => {
 //     }
     
 // }
-
+// //PRUEBA GET_POKEMON_TYPES 
 // const getTypes = () => {
 //     try {
 //         axios.get(`http://localhost:3001/types`)
@@ -107,31 +107,32 @@ export const getPokemonTypes = () => {
     
 // }
 
+
+// //PRUEBA CREATE_POKEMON 
+const createPokemon = (pokemon) => {
+    
+    try {
+        axios.post('http://localhost:3001/pokemons', pokemon)
+    } catch (error) {
+        return 'error'
+    }
+    
+}
+
+
+let poke = {
+    name: "prueba3 front",
+    health: 88,
+    attack: 16, 
+    defense: 13, 
+    speed: 38, 
+    height: 55, 
+    weight: 45,
+    types: ["normal"]
+  }
+
 // getAllPokemons()
 // getPokemonByName('charmander'); 
 // getPokemonById(8)
 // getTypes()
-
-// const createPokemon = (pokemon) => {
-    
-//     try {
-//         axios.post('http://localhost:3001/pokemons', pokemon)
-//     } catch (error) {
-//         return 'error'
-//     }
-    
-// }
-
-
-// let poke = {
-//     name: "prueba3 front",
-//     health: 88,
-//     attack: 16, 
-//     defense: 13, 
-//     speed: 38, 
-//     height: 55, 
-//     weight: 45,
-//     types: ["normal"]
-//   }
-
-//   createPokemon(poke)
+createPokemon(poke)
