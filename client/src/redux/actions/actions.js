@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 const axios = require('axios');
 
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
@@ -15,7 +16,7 @@ export const getAllPokemons = () => {
         return 'Ha ocurrido un error. Intenta recargando la Página.'
     }
     
-}
+};
 
 export const getPokemonByName = (name) => {
     try {
@@ -26,7 +27,7 @@ export const getPokemonByName = (name) => {
     } catch (error) {
         return 'Ha ocurrido un error, intenta nuevamente.'
     }
-} 
+}; 
 
  export const getPokemonById = (id) => {
     try {
@@ -37,7 +38,7 @@ export const getPokemonByName = (name) => {
     } catch (error) {
         return 'Ha ocurrido un error, intenta nuevamente.'
     }
-} 
+}; 
 
 export const createPokemon = (pokemon) => {
     try {
@@ -45,9 +46,9 @@ export const createPokemon = (pokemon) => {
             return axios.post('http://localhost:3001/pokemons', pokemon)
         }
     } catch (error) {
-        'Ha ocurrido un error, intenta nuevamente.'
+        return 'Ha ocurrido un error, intenta nuevamente.'
     }
-} 
+}; 
 
 export const getPokemonTypes = () => {
     try {
@@ -58,14 +59,14 @@ export const getPokemonTypes = () => {
     } catch (error) {
         return 'Ha ocurrido un error, intenta nuevamente.'
     }
-}
-
+};
+ 
 
 
 //PRUEBA GET_ALL_POKEMONS
-//   const getAllPokemons = () => {
+//   const getAllPokemons = async () => {
 //     try {
-//         axios.get('http://localhost:3001/pokemons')
+//         await axios.get('http://localhost:3001/pokemons')
 //             .then(json => console.log(json.data))
 //         }
 //     catch (error) {
@@ -109,30 +110,30 @@ export const getPokemonTypes = () => {
 
 
 // //PRUEBA CREATE_POKEMON 
-const createPokemon = (pokemon) => {
+// const createPokemon = (pokemon) => {
     
-    try {
-        axios.post('http://localhost:3001/pokemons', pokemon)
-    } catch (error) {
-        return 'error'
-    }
+//     try {
+//         axios.post('http://localhost:3001/pokemons', pokemon)
+//     } catch (error) {
+//         return 'error'
+//     }
     
-}
+// }
 
 
-let poke = {
-    name: "prueba3 front",
-    health: 88,
-    attack: 16, 
-    defense: 13, 
-    speed: 38, 
-    height: 55, 
-    weight: 45,
-    types: ["normal"]
-  }
+// let poke = {
+//     name: "prueba3 front",
+//     health: 88,
+//     attack: 16, 
+//     defense: 13, 
+//     speed: 38, 
+//     height: 55, 
+//     weight: 45,
+//     types: ["normal"]
+//   }
 
 // getAllPokemons()
 // getPokemonByName('charmander'); 
 // getPokemonById(8)
 // getTypes()
-createPokemon(poke)
+// createPokemon(poke)

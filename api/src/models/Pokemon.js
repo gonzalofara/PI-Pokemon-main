@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      defaultValue: "https://www.pngwing.com/en/free-png-bckje"
+      defaultValue: "https://image.pngaaa.com/364/512364-middle.png"
     }
   },
   {

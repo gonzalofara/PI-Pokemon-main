@@ -107,13 +107,13 @@ router.get('/', async (req, res) => {
                 }
             });
             
-            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40&offset=0');
+            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0');
             apiPromise = apiPromise.data.results?.map(pokemon => axios.get(pokemon.url));
 
             const responsePromise = await axios.all(apiPromise);
             const apiPokemons = responsePromise.map(p => {
                 return {
-                    pokeID: p.data.id,
+                    id: p.data.id,
                     name: p.data.name,
                     types: p.data.types.map(t => t.type.name),
                     image: p.data.sprites.front_default

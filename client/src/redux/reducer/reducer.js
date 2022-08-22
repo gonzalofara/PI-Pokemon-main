@@ -29,11 +29,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 types: action.payload
             }
-        case CREATE_POKEMON:
-            return {
-                ...state,
-                pokemon: action.payload
-            }
+        
         default: return state
     }
 };
