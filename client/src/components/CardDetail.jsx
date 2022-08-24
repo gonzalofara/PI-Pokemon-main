@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import {getPokemonById} from '../redux/actions/actions'
-
+import {getPokemonById, getAllPokemons} from '../redux/actions/actions';
+import {Link} from 'react-router-dom';
+import Loading from './Loading';
 
 const CardDetail = (props) => {
 
@@ -9,15 +10,19 @@ const CardDetail = (props) => {
     const pokemon = useSelector(state => state.pokemon)
     const dispatch = useDispatch();
 
+    
     useEffect(()=> {
+        dispatch(getAllPokemons())
         dispatch(getPokemonById(idParam))
     }, [dispatch, idParam]);
-
+    
   return (
     <div>
-        {   
+        
+        {  pokemon.name !== undefined ?
+            
             <div>
-
+                
                 <img src={pokemon.image} alt="pokemon-img" />
                 <h1>{pokemon.name}</h1>
                 <p>Hp: {pokemon.health}</p>
@@ -29,7 +34,9 @@ const CardDetail = (props) => {
                 <p>Types: {pokemon.types?.join(', ')}</p>
 
             </div>
-        }
+        : <Loading/> }  
+            <Link to="/home"><button>Home</button></Link>
+            
     </div>
   )
 }

@@ -1,0 +1,28 @@
+.input {
+    background-color: rgba(61, 29, 204, 0.685);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+}
+
+.input:focus{
+    background-color: rgb(61, 29, 204);
+    border: none;
+    -webkit-appearance: none;
+}
+
+.btn {
+    background-color: rgba(61, 29, 204, 0.685);
+    border:none;
+    border-radius: 5px;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+}
+.btn:hover {
+    background-color: rgb(61, 29, 204);
+    font-weight: bold;
+    cursor: pointer;
+}

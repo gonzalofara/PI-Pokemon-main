@@ -1,0 +1,45 @@
+.container {
+    background: rgba(0, 0, 0, 0.76) url('../resources/fondo.png') ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.title_nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.title {
+    background: url('../resources/pokemon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content:space-evenly;
+    height: 150px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.cardsContainer {
+    max-width: 992px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+

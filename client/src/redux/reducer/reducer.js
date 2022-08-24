@@ -1,10 +1,11 @@
-import {GET_ALL_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_ID, GET_POKEMON_TYPES} from '../actions/actions';
+import {GET_ALL_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_ID, GET_POKEMON_TYPES, FILTER_BY_NAME} from '../actions/actions';
 
 const initialState = {
     pokemons: [],
     types: [],
     pokemon: {},
-    newPokemon: {}
+    newPokemon: {},
+    filtered : []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -29,7 +30,24 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 types: action.payload
             }
-        
+        case FILTER_BY_NAME:
+            const selected = action.payload === 'Name asc' ? state.pokemons.sort((a,b) => {
+                a.toLowerCase()
+                b.toLowerCase()
+                if(a > b) return 1
+                if(a < b) return -1
+                return 0
+            }) : state.pokemons.sort((a,b) => {
+                a.toLowerCase()
+                b.toLowerCase()
+                if(a > b) return -1
+                if(a < b) return 1
+                return 0
+            })
+            return{
+                ...state,
+                pokemons: selected
+            }
         default: return state
     }
 };

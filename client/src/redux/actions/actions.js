@@ -5,6 +5,8 @@ export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_TYPES = 'GET_POKEMON_TYPES';
+export const FILTER_BY_NAME = 'FILTER_BY_NAME';
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 
 export const getAllPokemons = () => {
     try {
@@ -60,7 +62,20 @@ export const getPokemonTypes = () => {
         return 'Ha ocurrido un error, intenta nuevamente.'
     }
 };
- 
+
+//FILTRADOS
+export const filterByName = (name) => {
+    return {
+        type: FILTER_BY_NAME,
+        payload: name
+    }
+}
+export const filterByType = (type) => {
+    return {
+        type: FILTER_BY_TYPE,
+        payload: type
+    }
+}
 
 
 //PRUEBA GET_ALL_POKEMONS
