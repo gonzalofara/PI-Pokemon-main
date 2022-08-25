@@ -35,3 +35,6 @@ img {
 a {
     text-decoration: none;
 }
+a:visited{
+    color: none;
+}

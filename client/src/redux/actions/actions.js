@@ -7,6 +7,7 @@ export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_TYPES = 'GET_POKEMON_TYPES';
 export const FILTER_BY_NAME = 'FILTER_BY_NAME';
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
+export const CLEAR_STATE = 'CLEAR_STATE'
 
 export const getAllPokemons = () => {
     try {
@@ -77,6 +78,9 @@ export const filterByType = (type) => {
     }
 }
 
+export const clearState = () =>{
+    return {type: CLEAR_STATE}
+  }
 
 //PRUEBA GET_ALL_POKEMONS
 //   const getAllPokemons = async () => {

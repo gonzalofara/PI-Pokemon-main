@@ -13,7 +13,7 @@ const SearchBar = () => {
     const [input, setInput] = useState('');
     let history = useHistory();
     const handleInputChange = (e) => {
-        setInput(e.target.value.toLowerCase());
+        setInput(e.target.value);
     }
 
     

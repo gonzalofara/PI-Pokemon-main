@@ -1,4 +1,4 @@
-import {GET_ALL_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_ID, GET_POKEMON_TYPES, FILTER_BY_NAME} from '../actions/actions';
+import {GET_ALL_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_ID, GET_POKEMON_TYPES, FILTER_BY_NAME, CLEAR_STATE} from '../actions/actions';
 
 const initialState = {
     pokemons: [],
@@ -47,6 +47,11 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 pokemons: selected
+            }
+        case CLEAR_STATE:
+            return {
+                ...state,
+                pokemon : {}
             }
         default: return state
     }

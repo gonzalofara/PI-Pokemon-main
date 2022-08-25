@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
         
         try {
 
-            const dbPokemon = await Pokemon.findAll({
+            const dbPokemon = await Pokemon.findOne({
                 where: {
                     name: {
                       [Op.iLike]: `%${name}%`,
@@ -51,21 +51,20 @@ router.get('/', async (req, res) => {
                 include: Type
             });
 
-            const dbPokemonFormat = dbPokemon.map(p=>{
-                return {
-                    id: p.id,
-                    name: p.name.trim().toLowerCase().charAt(0).toUpperCase() + p.name.substring(1),
-                    health: p.health,
-                    attack: p.attack,
-                    defense: p.defense,
-                    speed: p.speed,
-                    height: p.height,
-                    weight: p.weight,
-                    types: p.Types.map(t => t.name)
-                }
-            });
+            const dbPokemonFormat = {
+                    id: dbPokemon.id,
+                    name: dbPokemon.name.trim().toLowerCase().charAt(0).toUpperCase() + dbPokemon.name.substring(1),
+                    health: dbPokemon.health,
+                    attack: dbPokemon.attack,
+                    defense: dbPokemon.defense,
+                    speed: dbPokemon.speed,
+                    height: dbPokemon.height,
+                    weight: dbPokemon.weight,
+                    types: dbPokemon.Types.map(t => t.name),
+                    image: dbPokemon.image
+                };
 
-            if(dbPokemon.length > 0) {
+            if(dbPokemon) {
                 return res.status(200).json(dbPokemonFormat)
             } else {
    
@@ -136,7 +135,7 @@ router.get('/:idPokemon', async (req, res) => {
 
     if(idPokemon.length > 4) {
         try {
-            const dbPokemonID =  await Pokemon.findAll({
+            const dbPokemonID =  await Pokemon.findOne({
                 where: {
                     id: idPokemon,
                 },
@@ -146,16 +145,20 @@ router.get('/:idPokemon', async (req, res) => {
                 }
             });
 
-            const formatIDpokemon = dbPokemonID.map(p => {
-                return {
-                    id: p.id,
-                    name: p.name,
-                    types: p.Types?.map(t => t.name),
-                    image: p.image
-                }
-            });
+            const formatIDpokemon =  {
+                    id: dbPokemonID.id,
+                    name: dbPokemonID.name.trim().toLowerCase().charAt(0).toUpperCase() + dbPokemonID.name.substring(1),
+                    health: dbPokemonID.health,
+                    attack: dbPokemonID.attack,
+                    defense: dbPokemonID.defense,
+                    speed: dbPokemonID.speed,
+                    height: dbPokemonID.height,
+                    weight: dbPokemonID.weight,
+                    types: dbPokemonID.Types.map(t => t.name),
+                    image: dbPokemonID.image
+            };
 
-            if(dbPokemonID.length > 0) return res.status(200).json(formatIDpokemon);
+            if(dbPokemonID) return res.status(200).json(formatIDpokemon);
         } catch (error) {
             return res.status(404).send('No se encontró un Pokemon con ese ID')
         }

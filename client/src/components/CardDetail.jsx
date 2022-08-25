@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import {getPokemonById, getAllPokemons} from '../redux/actions/actions';
+import {getPokemonById, getAllPokemons, clearState} from '../redux/actions/actions';
 import {Link} from 'react-router-dom';
 import Loading from './Loading';
 
@@ -10,11 +10,13 @@ const CardDetail = (props) => {
     const pokemon = useSelector(state => state.pokemon)
     const dispatch = useDispatch();
 
-    
+    const desmontar = ()=> {
+        dispatch(clearState())
+    }
     useEffect(()=> {
         dispatch(getAllPokemons())
         dispatch(getPokemonById(idParam))
-    }, [dispatch, idParam]);
+    }, [dispatch, idParam,]);
     
   return (
     <div>
@@ -35,7 +37,7 @@ const CardDetail = (props) => {
 
             </div>
         : <Loading/> }  
-            <Link to="/home"><button>Home</button></Link>
+            <Link to="/home" onClick={()=> desmontar()}><button>Home</button></Link>
             
     </div>
   )

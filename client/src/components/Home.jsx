@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
 import {getAllPokemons, getPokemonTypes} from '../redux/actions/actions';
 import Card from './Card.jsx';
 import Loading from './Loading';
@@ -21,6 +20,7 @@ const Home = () => {
   const lastOnPage = page * showPerPage; 
   const firstOnPage = lastOnPage - showPerPage;
   const shownPokemons = allPokemons.slice(firstOnPage, lastOnPage);
+  
   function pagination(pageNumber){
     return setPage(pageNumber)
   }
@@ -39,8 +39,9 @@ const Home = () => {
         <div className={s.title}></div>
       </div>
       
+      {!shownPokemons.length > 0 ? null : <SearchBar />}
         <div className={s.cardsContainer}>
-          {shownPokemons.length > 0 ? shownPokemons.map(p => 
+          {shownPokemons.length > 0 ?  shownPokemons.map(p => 
             (
               // <div  key={p.id}>
                 <Card 
