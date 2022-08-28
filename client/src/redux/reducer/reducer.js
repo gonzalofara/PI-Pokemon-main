@@ -38,7 +38,7 @@ const rootReducer = (state = initialState, action) => {
             }
         
         case ORDER_BY_NAME:
-            let orderName = action.payload === "asc" ? 
+            const orderName = action.payload === "asc" ? 
             state.pokemons.sort((a, b) => {
                 return a.name > b.name
             }) :
@@ -51,13 +51,14 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case ORDER_BY_ATTACK:
-            let orderAttack = action.payload === "asc" ?
-                state.pokemons.sort((a, b) => {
-                    return a.attack - b.attack
-                }) :
-                state.pokemons.sort((a, b) => {
-                    return b.attack - a.attack
-                })
+            const orderAttack = action.payload === "attackAsc" ?
+            state.pokemons.sort((a, b) => {
+                return a.attack > b.attack
+            }) :
+            state.pokemons.sort((a, b) => {
+                return a.attack < b.attack;
+            });
+
             return{
                 ...state,
                 pokemons: orderAttack

@@ -101,8 +101,14 @@ router.get('/', async (req, res) => {
             dbPokemons = dbPokemons.map(p => {
                 return {
                     id: p.id,
-                    name: p.name,
-                    types: p.Types?.map(t => t.name),
+                    name: p.name.trim().toLowerCase().charAt(0).toUpperCase() + p.name.substring(1),
+                    health: p.health,
+                    attack: p.attack,
+                    defense: p.defense,
+                    speed: p.speed,
+                    height: p.height,
+                    weight: p.weight,
+                    types: p.Types.map(t => t.name),
                     image: p.image
                 }
             });
@@ -115,6 +121,12 @@ router.get('/', async (req, res) => {
                 return {
                     id: p.data.id,
                     name: p.data.name,
+                    health: p.data.stats[0].base_stat,
+                    attack: p.data.stats[1].base_stat,
+                    defense: p.data.stats[2].base_stat,
+                    speed: p.data.stats[5].base_stat,
+                    height: p.data.height,
+                    weight: p.data.weight,
                     types: p.data.types.map(t => t.type.name),
                     image: p.data.sprites.other.dream_world.front_default
                 }

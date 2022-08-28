@@ -66,11 +66,11 @@ const Home = () => {
                   <div className={s.orderName}>
                     <select>
                       <option className={s.btn} defaultValue="Order by" disabled>Order By</option>
-                      <option className={s.btn} value="all" onClick={handleByDefault}>Default</option>
-                      <option className={s.btn} value="asc" onClick={handleByName}>Name ↑</option>
-                      <option className={s.btn} value="desc" onClick={handleByName}>Name ↓</option>
-                      <option className={s.btn} value="asc" onClick={handleByAttack}>Attack ↑</option>
-                      <option className={s.btn} value="desc" onClick={handleByAttack}>Attack ↓</option>
+                      <option className={s.btn} value="default" onClick={handleByDefault}>Default</option>
+                      <option className={s.btn} value="asc" onClick={(e)=>handleByName(e)}>Name ↑</option>
+                      <option className={s.btn} value="desc" onClick={(e)=>handleByName(e)}>Name ↓</option>
+                      <option className={s.btn} value="attackAsc" onClick={(e)=>handleByAttack(e)}>Attack ↑</option>
+                      <option className={s.btn} value="attackDesc" onClick={(e)=>handleByAttack(e)}>Attack ↓</option>
                     </select>
                     
                 </div>
