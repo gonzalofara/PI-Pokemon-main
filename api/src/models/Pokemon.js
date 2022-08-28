@@ -16,25 +16,31 @@ module.exports = (sequelize) => {
       unique: true
     },
     health: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 25
     },
     attack: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 25
     },
     defense: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 25
     },
     speed: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 25
     },
     height: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 5
     },
     weight: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 25
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       defaultValue: "https://image.pngaaa.com/364/512364-middle.png"
     }
   },

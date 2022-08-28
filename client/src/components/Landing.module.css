@@ -1,0 +1,47 @@
+ .divHome{
+    background: rgba(0, 0, 0, 0.76) url('../resources/bigball.jpg') ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        /* flex-wrap: wrap;
+        flex-direction: column;
+        position: absolute; */
+    
+    
+} 
+
+.link {
+    width: 33%;
+    height: 33%;
+    
+}
+.divTitle{
+    background-image: url('../resources/pokemon.png') ;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}  
+
+.divTitle:hover {
+    transition: all 0.5s;
+    background-image: url('../resources/homebtn.png');
+    background-repeat: no-repeat;
+    transform: scale(1.8);
+    /* width: %; */
+    
+}
+
+.divTitle:hover ~ .divHome{
+    filter: brightness(50%);
+}
+
+
+

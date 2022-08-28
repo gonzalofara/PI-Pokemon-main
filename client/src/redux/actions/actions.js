@@ -5,8 +5,12 @@ export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
 export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
 export const GET_POKEMON_ID = 'GET_POKEMON_ID';
 export const GET_POKEMON_TYPES = 'GET_POKEMON_TYPES';
-export const FILTER_BY_NAME = 'FILTER_BY_NAME';
+
+export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
+export const ORDER_BY_NAME = 'ORDER_BY_NAME';
+
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
+
 export const CLEAR_STATE = 'CLEAR_STATE'
 
 export const getAllPokemons = () => {
@@ -64,23 +68,48 @@ export const getPokemonTypes = () => {
     }
 };
 
-//FILTRADOS
-export const filterByName = (name) => {
+//ORDENAMIENTOS
+export const orderByName = (order) => {
+    
     return {
-        type: FILTER_BY_NAME,
-        payload: name
-    }
-}
-export const filterByType = (type) => {
-    return {
-        type: FILTER_BY_TYPE,
-        payload: type
+        type: ORDER_BY_NAME,
+        payload: order
     }
 }
 
+export const orderByAttack = (order) => {
+    return {
+        type: ORDER_BY_ATTACK,
+        payload: order
+    }
+}
+
+export const orderById = (order) => {
+/*     if(order === 'asc'){
+        return {
+            type: ORDER_ID_ASC
+        }
+    } else if(order === 'desc'){
+        return { 
+            type: ORDER_ID_DESC
+        }
+    } */
+}
+
+
+
+//FILTRADOS
+export const filterByType = (type) => {
+    return function(dispatch){
+        return dispatch({
+            type: FILTER_BY_TYPE,
+            payload: type
+        })
+    }
+}
 export const clearState = () =>{
     return {type: CLEAR_STATE}
-  }
+}
 
 //PRUEBA GET_ALL_POKEMONS
 //   const getAllPokemons = async () => {

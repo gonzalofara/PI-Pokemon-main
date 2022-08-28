@@ -26,23 +26,18 @@ const SearchBar = () => {
     }
 
   return (
-    <div>
-        <form onSubmit={handleSubmit}>
+  
+        <form onSubmit={handleSubmit} className={s.form}>
             <input 
                 className={s.input}
                 type="text" 
                 value={input}
                 onChange={handleInputChange}
-                placeHolder="Pokemon name or ID..."
+                placeholder="Search..."
                 onClick={()=>  setInput('')}
             />
-            <button
-                type="submit"
-                className={s.btn}
-            > Search
-            </button>
         </form>
-    </div>
+ 
   )
 }
 

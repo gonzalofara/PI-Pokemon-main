@@ -12,7 +12,7 @@ const Pagination = ({showPerPage, allPokemons, pagination}) => {
     <div className={s.btnContainer}>
         {pageNumbers && pageNumbers.map(n => 
             <div key={n} >  
-                <button onClick={()=> pagination(n)}>{n}</button>
+                <button className={s.btn} onClick={()=> pagination(n)}>{n}</button>
             </div>    
             )
         }

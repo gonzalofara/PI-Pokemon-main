@@ -64,32 +64,33 @@ router.get('/', async (req, res) => {
                     image: dbPokemon.image
                 };
 
-            if(dbPokemon) {
+            if(dbPokemon.name) {
                 return res.status(200).json(dbPokemonFormat)
             } else {
-   
-            
-                   const apiByName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+                
+               
+                const apiByName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`)
+        
+                const matchedPokemon = {
+                    id: apiByName.data.id,
+                    name: apiByName.data.name,
+                    health: apiByName.data.stats[0].base_stat,
+                    attack: apiByName.data.stats[1].base_stat,
+                    defense: apiByName.data.stats[2].base_stat,
+                    speed: apiByName.data.stats[5].base_stat,
+                    height: apiByName.data.height,
+                    weight: apiByName.data.weight,
+                    types: apiByName.data.types.map(t => t.type.name),
+                    image: apiByName.data.sprites.front_default
+                };
 
-                   let matchedPokemon = {
-                        id: apiByName.data.id,
-                        name: apiByName.data.name,
-                        health: apiByName.data.stats[0].base_stat,
-                        attack: apiByName.data.stats[1].base_stat,
-                        defense: apiByName.data.stats[2].base_stat,
-                        speed: apiByName.data.stats[5].base_stat,
-                        height: apiByName.data.height,
-                        weight: apiByName.data.weight,
-                        types: apiByName.data.types.map(t => t.type.name),
-                        image: apiByName.data.sprites.front_default,
-                   }
-                   
-                   return res.status(200).json(matchedPokemon);
+                return res.status(200).send(matchedPokemon);
+                
                
             }
 
         } catch (error) {
-            return res.status(404).send('No se encontró un Pokemon con ese nombre');
+            return res.status(404).send( error );
         }
         
     } else{
@@ -115,7 +116,7 @@ router.get('/', async (req, res) => {
                     id: p.data.id,
                     name: p.data.name,
                     types: p.data.types.map(t => t.type.name),
-                    image: p.data.sprites.front_default
+                    image: p.data.sprites.other.dream_world.front_default
                 }
             });
 
@@ -176,7 +177,7 @@ router.get('/:idPokemon', async (req, res) => {
             height: apiPokemonID.data.height,
             weight: apiPokemonID.data.weight,
             types: apiPokemonID.data.types.map(t => t.type.name),
-            image: apiPokemonID.data.sprites.front_default,
+            image: apiPokemonID.data.sprites.other.dream_world.front_default
         };
 
         return res.status(200).json(matchedPokemon);
