@@ -38,63 +38,7 @@ router.get('/', async (req, res) => {
 
     const {name} = req.query;
 
-    if(name){
-        
-        try {
-
-            const dbPokemon = await Pokemon.findOne({
-                where: {
-                    name: {
-                      [Op.iLike]: `%${name}%`,
-                    },
-                },
-                include: Type
-            });
-
-            const dbPokemonFormat = {
-                    id: dbPokemon.id,
-                    name: dbPokemon.name.trim().toLowerCase().charAt(0).toUpperCase() + dbPokemon.name.substring(1),
-                    health: dbPokemon.health,
-                    attack: dbPokemon.attack,
-                    defense: dbPokemon.defense,
-                    speed: dbPokemon.speed,
-                    height: dbPokemon.height,
-                    weight: dbPokemon.weight,
-                    types: dbPokemon.Types.map(t => t.name),
-                    image: dbPokemon.image
-                };
-
-            if(dbPokemon.name) {
-                return res.status(200).json(dbPokemonFormat)
-            } else {
-                
-               
-                const apiByName = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`)
-        
-                const matchedPokemon = {
-                    id: apiByName.data.id,
-                    name: apiByName.data.name,
-                    health: apiByName.data.stats[0].base_stat,
-                    attack: apiByName.data.stats[1].base_stat,
-                    defense: apiByName.data.stats[2].base_stat,
-                    speed: apiByName.data.stats[5].base_stat,
-                    height: apiByName.data.height,
-                    weight: apiByName.data.weight,
-                    types: apiByName.data.types.map(t => t.type.name),
-                    image: apiByName.data.sprites.front_default
-                };
-
-                return res.status(200).send(matchedPokemon);
-                
-               
-            }
-
-        } catch (error) {
-            return res.status(404).send( error );
-        }
-        
-    } else{
-        
+   
         try {
 
             let dbPokemons = await Pokemon.findAll({include: Type});
@@ -133,12 +77,36 @@ router.get('/', async (req, res) => {
             });
 
             let allPokemons = apiPokemons.concat(dbPokemons);
-            return res.status(200).json(allPokemons);
+            if(name) {
+                let byName = allPokemons.filter(p => p.name.toLowerCase() === name.toLowerCase());
+                const byNameFormat = byName.map(p => {
+                return {
+                    id: p.id,
+                    name: p.name,
+                    health: p.health,
+                    attack: p.attack,
+                    defense: p.defense,
+                    speed: p.speed,
+                    height: p.height,
+                    weight: p.weight,
+                    types: p.types.map(t => t.name),
+                    image: p.image
+                }
+            });
+
+                console.log(byNameFormat)
+                byName.length > 0 ? res.status(200).json(byNameFormat) : res.status(404).send('Pokemons not found');
+            } else {
+
+                return res.status(200).json(allPokemons);
+            }
 
         } catch (error) {
             return res.status(404).send(error)
         }
-    }
+  
+        
+        
 
 });
 

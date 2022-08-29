@@ -1,29 +1,21 @@
 
 
 .input {
-    /* background-color: rgba(61, 29, 204, 0.685);
-    border: none;
-    border-radius: 5px;
-    color: white;
-    margin: 5px;
-    padding: 10px;
-    width: 255px; */
-    height: 90%;
-    width: 90%;
-    border: 3px solid #e20f0fcc;
+    width: 80%;
+    border: 1px solid #e20f0fcc;
     padding: 5px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     letter-spacing: 1px;
     outline: none;
-    border-radius: 25px;
+    border-radius: 5px;
     transition: all .5s ease-in-out;
     background-color: transparent;
     color:#fff;
 }
 
-.input:hover {
-    background-color: #ff0b0b7c;
+.input:hover {  
+    
 }
 
 .input::placeholder{
@@ -33,20 +25,18 @@
   }
 .input:focus{
     color: white;
-    width: 90%;
     background-color: transparent;
     border-radius: 0px;
     border:none;
     border-bottom:1px solid rgba(255, 255, 255, 0.884);
-    transition: all 1s cubic-bezier(0, 0.110, 0.35, 2);  
-    outline: none;
+    
 }
 .input:focus::placeholder{
     /* color:transparent; */
-    font-size: 20px;
+    font-size: 16px;
     /* letter-spacing: 2px; */
-    font-weight: 800;
-    text-align: center;
+    /* font-weight: 800; */
+    /* text-align: center; */
   }
 
 /* .btn {

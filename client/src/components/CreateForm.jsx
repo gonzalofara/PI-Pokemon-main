@@ -45,8 +45,8 @@ const CreateForm = () => {
                 <label>Name</label>
                 <input type="text" name="name" required onChange={handleChange}/>
             </div>
-                <select className={s.selector} onChange={handleSelectChange}>
-                    <option value hidden >Pokemon Type</option>
+                <select className={s.selector} onChange={handleSelectChange} >
+                    <option value hidden >Pokemon Types</option>
                         {types && types.map(t => 
                                 <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
                         )}
@@ -57,6 +57,9 @@ const CreateForm = () => {
                                 <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
                         )}
                 </select>
+                <label for='image' className={s.labelImage}>Pokemon Image
+                    <input id='image'type="file" className={s.image} accept=".png, .jpg, .jpeg"/>
+                </label>
         <div className={s.inputsContainer}>
                 
                 <div className={s.labels}>

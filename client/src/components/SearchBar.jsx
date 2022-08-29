@@ -33,7 +33,7 @@ const SearchBar = () => {
                 type="text" 
                 value={input}
                 onChange={handleInputChange}
-                placeholder="Search..."
+                placeholder="Pokemon name..."
                 onClick={()=>  setInput('')}
             />
         </form>

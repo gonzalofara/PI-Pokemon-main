@@ -35,24 +35,34 @@
 .order_search {
     background-color: rgba(255, 0, 0, 0.329);
     border: 1px solid rgba(255, 255, 255, 0.616);
-    border-radius: 25px;
+    /* border-radius: 25px; */
     display: flex;
     flex-direction: row-reverse;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     width: 80%;
-    margin: 20px auto;
+    margin-top: 10px;
     padding: 5px;
+    /* position:relative; */
 }
 .orders select {
     padding: 5px;
     background-color: transparent;
     border: none;
     color: white;
+    /* overflow: hidden; */
 }
 
-.orders select:hover{
+select:hover{
+    cursor: pointer;
     color: rgb(214, 214, 214);
+}
+select:focus{
+    color:black;
+    background-color:transparent;
+}
+option {
+    background-color:transparent;
 }
 
 .options {
@@ -62,12 +72,23 @@
 
 
 .create {
-   font-weight: bold;
-   font-size: 20px;
-    color:white;
+    background: url('../resources/createBtn.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100px;
+    width: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 156px auto;
+    /* color:white; */
 }
+
 .create:hover {
-    color: gold;
+    transform: scale(1.1);
 }
 
 .orderSelect{
@@ -78,6 +99,7 @@
     /* border-bottom: 2px solid white; */
     padding: 5px;
 }
+
 
 .resetFilters{
     font-weight: 600;
@@ -93,7 +115,7 @@
 .cardsContainer {
     width: 90%;
     margin: 0 auto;
-    margin-top: 25px;
+    margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -104,3 +126,4 @@
     margin: 30px auto;
     position: static;
 }
+
