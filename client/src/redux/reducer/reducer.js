@@ -35,10 +35,10 @@ const rootReducer = (state = initialState, action) => {
         case ORDER_BY_NAME:
             const orderName = action.payload === "asc" ? 
             state.pokemons.sort((a, b) => {
-                return a.name > b.name
+                return a.name.toLowerCase() > b.name.toLowerCase()
             }) :
             state.pokemons.sort((a, b) => {
-                return a.name < b.name;
+                return a.name.toLowerCase() < b.name.toLowerCase();
             });
             return {
                 ...state,

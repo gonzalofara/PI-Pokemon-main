@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
-import {getAllPokemons, getPokemonTypes, orderByName, orderByAttack, filterByType} from '../redux/actions/actions';
+import {getAllPokemons, getPokemonTypes, orderByName, orderByAttack, filterByType, resetFilter} from '../redux/actions/actions';
 import Card from './Card.jsx';
 import Loading from './Loading';
 import SearchBar from './SearchBar';
@@ -60,7 +60,6 @@ const Home = () => {
   //default
   const handleByDefault = (e)=>{
     // e.preventDefault();
-    // dispatch(resetFilter())
     dispatch(getAllPokemons());
     setPage(1);
     history.push('/home');

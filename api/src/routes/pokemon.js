@@ -78,24 +78,11 @@ router.get('/', async (req, res) => {
 
             let allPokemons = apiPokemons.concat(dbPokemons);
             if(name) {
-                let byName = allPokemons.filter(p => p.name.toLowerCase() === name.toLowerCase());
-                const byNameFormat = byName.map(p => {
-                return {
-                    id: p.id,
-                    name: p.name,
-                    health: p.health,
-                    attack: p.attack,
-                    defense: p.defense,
-                    speed: p.speed,
-                    height: p.height,
-                    weight: p.weight,
-                    types: p.types.map(t => t.name),
-                    image: p.image
-                }
-            });
+                let byName = allPokemons.find(p => p.name.toLowerCase() === name.toLowerCase());
+                
 
-                console.log(byNameFormat)
-                byName.length > 0 ? res.status(200).json(byNameFormat) : res.status(404).send('Pokemons not found');
+                console.log(byName)
+                byName ? res.status(200).json(byName) : res.status(404).send('Pokemons not found');
             } else {
 
                 return res.status(200).json(allPokemons);
