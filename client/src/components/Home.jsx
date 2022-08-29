@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
-import {getAllPokemons, getPokemonTypes, orderByName, orderByAttack} from '../redux/actions/actions';
+import {getAllPokemons, getPokemonTypes, orderByName, orderByAttack, filterByType} from '../redux/actions/actions';
 import Card from './Card.jsx';
 import Loading from './Loading';
 import SearchBar from './SearchBar';
@@ -13,6 +13,7 @@ const Home = () => {
 
   //estado y acciones
   let allPokemons = useSelector((state) => state.pokemons);
+  let allTypes = useSelector((state) => state.types);
   const dispatch = useDispatch()
   let history = useHistory();
   //paginación
@@ -32,7 +33,7 @@ const Home = () => {
     dispatch(getPokemonTypes());
   }, [dispatch])
 
-
+  //ordenamientos
   const handleByName = (e)=>{
     e.preventDefault();
     dispatch(orderByName(e.target.value));
@@ -46,8 +47,18 @@ const Home = () => {
     history.push('/home');
   }
 
+  //filtrados
+  const handleFilterType = (e)=>{
+    e.preventDefault();
+    dispatch(filterByType(e.target.value));
+    setPage(1);
+    history.push('/home');
+  }
+
+  //default
   const handleByDefault = (e)=>{
     e.preventDefault();
+    // dispatch(resetFilter())
     dispatch(getAllPokemons());
     setPage(1);
     history.push('/home');
@@ -63,17 +74,23 @@ const Home = () => {
               <div className={s.order_search}>
                   <SearchBar />
                   <Link to='/create' className={s.create}>Create Pókemon</Link>
-                  <div className={s.orderName}>
-                    <select>
-                      <option className={s.btn} defaultValue="Order by" disabled>Order By</option>
-                      <option className={s.btn} value="default" onClick={handleByDefault}>Default</option>
-                      <option className={s.btn} value="asc" onClick={(e)=>handleByName(e)}>Name ↑</option>
-                      <option className={s.btn} value="desc" onClick={(e)=>handleByName(e)}>Name ↓</option>
-                      <option className={s.btn} value="attackAsc" onClick={(e)=>handleByAttack(e)}>Attack ↑</option>
-                      <option className={s.btn} value="attackDesc" onClick={(e)=>handleByAttack(e)}>Attack ↓</option>
+                  <div className={s.selectContainer}>
+                    <select className={s.orderSelect}>
+                      <option className={s.orderOption} defaultValue="Order by" selected disabled>Order By</option>
+                      <option className={s.orderOption} value="default" onClick={handleByDefault}>Default</option>
+                      <option className={s.orderOption} value="asc" onClick={(e)=>handleByName(e)}>Name ↑</option>
+                      <option className={s.orderOption} value="desc" onClick={(e)=>handleByName(e)}>Name ↓</option>
+                      <option className={s.orderOption} value="attackAsc" onClick={(e)=>handleByAttack(e)}>Attack ↑</option>
+                      <option className={s.orderOption} value="attackDesc" onClick={(e)=>handleByAttack(e)}>Attack ↓</option>
                     </select>
-                    
-                </div>
+                  </div>
+                  <select className={s.orderSelect}>
+                      <option defaultValue="Filter by" selected disabled>Filter By</option>
+                      {!allTypes.length > 0 ? null : allTypes.map(t=> (
+                          <option key={t.id} value={t.name} onClick={(e)=>handleFilterType(e)}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
+                      ))}
+                  </select>
+                  <option className={s.resetFilters} value="default" onClick={handleByDefault}>Default</option>
               </div>
             }
       </div>

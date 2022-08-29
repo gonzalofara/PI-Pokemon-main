@@ -11,7 +11,8 @@ export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 
-export const CLEAR_STATE = 'CLEAR_STATE'
+export const CLEAR_STATE = 'CLEAR_STATE';
+export const RESET_FILTER = 'RESET_FILTER';
 
 export const getAllPokemons = () => {
     try {
@@ -84,31 +85,18 @@ export const orderByAttack = (order) => {
     }
 }
 
-export const orderById = (order) => {
-/*     if(order === 'asc'){
-        return {
-            type: ORDER_ID_ASC
-        }
-    } else if(order === 'desc'){
-        return { 
-            type: ORDER_ID_DESC
-        }
-    } */
-}
-
-
-
 //FILTRADOS
 export const filterByType = (type) => {
-    return function(dispatch){
-        return dispatch({
-            type: FILTER_BY_TYPE,
-            payload: type
-        })
+    return {
+        type: FILTER_BY_TYPE,
+        payload: type
     }
 }
 export const clearState = () =>{
     return {type: CLEAR_STATE}
+}
+export const resetFilter = () =>{
+    return {type: RESET_FILTER}
 }
 
 //PRUEBA GET_ALL_POKEMONS
