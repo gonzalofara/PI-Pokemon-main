@@ -120,7 +120,7 @@ const Home = () => {
           )  : <Loading />}
       </div>
             <div className={s.pagination}>
-                <Pagination showPerPage={showPerPage}  allPokemons={allPokemons.length} pagination={pagination} setPage={setPage} page={page}/>
+                <Pagination showPerPage={showPerPage}  allPokemons={allPokemons.length} pagination={pagination} page={page}/>
             </div>
     </div>
   )

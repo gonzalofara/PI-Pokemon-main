@@ -8,14 +8,13 @@ import s from './SearchBar.module.css';
 
 const SearchBar = () => {
 
-    const pokeByName = useSelector(state => state.pokemon)
     const dispatch = useDispatch();
     const [input, setInput] = useState('');
     let history = useHistory();
 
 
     const handleInputChange = (e) => {
-        setInput(e.target.value);
+        setInput(e.target.value.toLowerCase());
     }
 
     const handleSubmit = (e) => {

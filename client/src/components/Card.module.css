@@ -5,14 +5,14 @@
     border-radius: 9px;
     display: flex;
     flex-direction: column;
-    margin-top: 5px auto;
-    width: 20%;
+    margin: 5px auto;
+    width: 25%;
     height: 285px;
 }
 
 .container:hover {
-    backdrop-filter: blur(3px);
-    background: linear-gradient(270deg,rgba(255, 81, 0, 0.548), transparent);
+    backdrop-filter: blur(5px);
+    background: linear-gradient(270deg,rgba(209, 1, 1, 0.63), transparent);
     background-size: 400% 400%;
     -webkit-animation: uno 30s ease infinite;
     -moz-animation: uno 30s ease infinite;
@@ -51,19 +51,20 @@
     font-weight: bold;     
     letter-spacing: 1px;                                       
     margin: 0 auto;
+    text-transform: capitalize;
     text-shadow: -5px 2px 4px #171addc9;
 }
 
 .pokeTypes {
     margin-top:0;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .pokeImage {
     margin: 0 auto;
-    margin-top: 10px;
     /* height:150px; */
-    width: 80%;
+    width: 99%;
+    height: 99%;
     /* object-fit: fill; */
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import s from './Pagination.module.css'
 
 
-const Pagination = ({showPerPage, allPokemons, pagination, page, setPage}) => {
+const Pagination = ({showPerPage, allPokemons, pagination, page}) => {
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(allPokemons/showPerPage); i++) {  
@@ -12,14 +12,17 @@ const Pagination = ({showPerPage, allPokemons, pagination, page, setPage}) => {
     
   return (
     <div className={s.btnContainer}>
-        <button className={s.btn} onClick={page > 1 ? ()=> pagination(page - 1) : null}>&lt;</button>
+
+        <a className={s.btn} onClick={page > 1 ? ()=> pagination(page - 1) : null} href="#top">&lt;</a>
+
         {pageNumbers && pageNumbers.map(n => 
-            <div key={n} >  
-                <button className={s.btn} onClick={()=> pagination(n)}>{n}</button>
-            </div>    
+             
+                <a key={n} className={s.btn} onClick={()=> pagination(n)} href="#top">{n}</a>
+             
             )
         }
-        <button className={s.btn} onClick={page < Math.ceil(allPokemons/showPerPage) ? ()=> pagination(page + 1) : null}>&gt;</button>
+        <a className={s.btn} onClick={page < Math.ceil(allPokemons/showPerPage) ? ()=> pagination(page + 1) : null} href="#top">&gt;</a>
+        
     </div>
   )
 }

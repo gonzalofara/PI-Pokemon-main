@@ -10,12 +10,11 @@ const CreateForm = () => {
     let types = useSelector(state => state.types);
     const dispatch = useDispatch();
     const history = useHistory();
+    let typesSelected = [];
 
     useEffect(()=> {
         dispatch(getPokemonTypes())   
     }, [dispatch])
-
-    
 
     
     const handleChange = (e) =>{
@@ -26,11 +25,12 @@ const CreateForm = () => {
     }
 
     const handleSelectChange = (e) =>{
-        setInput({
+        setInput({ 
             ...input,
             types: [e.target.value]
-        })
+        });
     }
+
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -48,8 +48,8 @@ const CreateForm = () => {
                 <label>Name</label>
                 <input type="text" name="name" required onChange={handleChange}/>
             </div>
-                <select className={s.selector} onChange={handleSelectChange} >
-                    <option value hidden >Pokemon Types</option>
+                <select className={s.selector}  onChange={handleSelectChange}>
+                    <option value hidden >Pokemon Type</option>
                         {types && types.map(t => 
                                 <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
                         )}
