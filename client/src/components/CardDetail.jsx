@@ -47,15 +47,16 @@ const CardDetail = (props) => {
                     
                         <p className={s.data}><span className={s.span}>Weight</span> {pokemon.weight}</p>
                     
-                    </div>
-                    <div>                    
-                       <p className={s.types}>{pokemon.types?.join(' - ')}</p>
-                    </div>
+                </div>
+                <div>                    
+                   <p className={s.types}>{pokemon.types?.join(' - ')}</p>
+                </div>
             
             </div>
+            <Link to="/home" onClick={()=> desmontar()}><button className={s.btnPokemon}>Home</button></Link>
         </div> 
         : <Loading/> }  
-            <Link to="/home" onClick={()=> desmontar()}><button className={s.btnPokemon}>Home</button></Link>
+            
               
     </div>
   )

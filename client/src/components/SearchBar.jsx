@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
 import {getPokemonByName} from '../redux/actions/actions';
 import s from './SearchBar.module.css';
@@ -8,16 +8,16 @@ import s from './SearchBar.module.css';
 
 const SearchBar = () => {
 
-    // const pokeByName = useSelector(state => state.pokemon)
+    const pokeByName = useSelector(state => state.pokemon)
     const dispatch = useDispatch();
     const [input, setInput] = useState('');
     let history = useHistory();
+
+
     const handleInputChange = (e) => {
         setInput(e.target.value);
     }
 
-    
-    
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(getPokemonByName(input));

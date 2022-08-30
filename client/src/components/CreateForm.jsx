@@ -10,11 +10,14 @@ const CreateForm = () => {
     let types = useSelector(state => state.types);
     const dispatch = useDispatch();
     const history = useHistory();
-    
+
     useEffect(()=> {
         dispatch(getPokemonTypes())   
     }, [dispatch])
 
+    
+
+    
     const handleChange = (e) =>{
         setInput({ 
             ...input,

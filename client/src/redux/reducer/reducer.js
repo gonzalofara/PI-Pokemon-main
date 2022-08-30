@@ -1,11 +1,10 @@
-import {GET_ALL_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_ID, GET_POKEMON_TYPES, ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_BY_TYPE, CLEAR_STATE, RESET_FILTER} from '../actions/actions';
+import {GET_ALL_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_ID, GET_POKEMON_TYPES, ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_CREATED, CLEAR_STATE, RESET_FILTER} from '../actions/actions';
 
 const initialState = {
     pokemons: [],
     types: [],
     pokemon: {},
     newPokemon: {},
-    filtered : []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -46,24 +45,24 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case ORDER_BY_ATTACK:
-            const orderAttack = action.payload === "attackAsc" ?
-            state.pokemons.sort((a, b) => {
-                return a.attack > b.attack
-            }) :
-            state.pokemons.sort((a, b) => {
-                return a.attack < b.attack;
-            });
-
-            return{
-                ...state,
-                pokemons: orderAttack
-            }
+            const orderAttack = action.payload 
+            if(orderAttack === 'attackAsc')
+                return {
+                    ...state,
+                    pokemons:  state.pokemons.sort((a, b) =>  a.attack > b.attack)
+                }
+            else if(orderAttack === 'attackDesc')
+                return {
+                    ...state,
+                    pokemons: state.pokemons.sort((a, b) => a.attack < b.attack)
+                }
+            break;
+            
 
         //FILTRADOS
         case FILTER_BY_TYPE:
             let type = action.payload;
             const filteredBy = state.pokemons.filter(p=> p.types.includes(type))
-            // const filteredPokes = state.pokemons.filter(p=> p.types.includes(type))
             if(filteredBy.length > 0){
                 return {
                     ...state,
@@ -76,6 +75,22 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
+        case FILTER_BY_CREATED:
+            let created = state.pokemons.filter(p=> typeof p.id === 'string')
+            let api = state.pokemons.filter(p=> typeof p.id === 'number')
+            if(action.payload === 'created'){
+                return{
+                    ...state,
+                    pokemons: created
+                }
+            } else if(action.payload === 'api'){
+                return {
+                    ...state,
+                    pokemons: api
+                }
+            } 
+        break    
+            
         case CLEAR_STATE:
             return {
                 ...state,

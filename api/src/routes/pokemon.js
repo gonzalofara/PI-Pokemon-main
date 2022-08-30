@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
                     height: p.data.height,
                     weight: p.data.weight,
                     types: p.data.types.map(t => t.type.name),
-                    image: p.data.sprites.other.dream_world.front_default
+                    image: p.data.sprites.other.home.front_default
                 }
             });
 
@@ -144,7 +144,7 @@ router.get('/:idPokemon', async (req, res) => {
             height: apiPokemonID.data.height,
             weight: apiPokemonID.data.weight,
             types: apiPokemonID.data.types.map(t => t.type.name),
-            image: apiPokemonID.data.sprites.other.dream_world.front_default
+            image: apiPokemonID.data.sprites.other.home.front_default
         };
 
         return res.status(200).json(matchedPokemon);

@@ -60,6 +60,7 @@ select:hover{
 select:focus{
     color:black;
     background-color:transparent;
+    
 }
 option {
     background-color:transparent;
@@ -98,6 +99,7 @@ option {
     color: white;
     /* border-bottom: 2px solid white; */
     padding: 5px;
+    
 }
 
 
@@ -109,7 +111,8 @@ option {
 .resetFilters:hover{
     cursor: pointer;
     /* font-size: 20px; */
-    color:blue;;
+    font-weight: bold;
+    color: rgba(177, 177, 177, 0.801);
 }
 
 .cardsContainer {

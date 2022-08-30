@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
-import {getAllPokemons, getPokemonTypes, orderByName, orderByAttack, filterByType, resetFilter} from '../redux/actions/actions';
+import {getAllPokemons, getPokemonTypes, orderByName, orderByAttack, filterByType, filterByCreated} from '../redux/actions/actions';
 import Card from './Card.jsx';
 import Loading from './Loading';
 import SearchBar from './SearchBar';
@@ -51,18 +51,22 @@ const Home = () => {
 
   //filtrados
   const handleFilterType = (e)=>{
-    // e.preventDefault();
     dispatch(filterByType(e.target.value));
+    setPage(1);
+    history.push('/home');
+  }
+  const handleByCreated = (e)=>{
+    // e.preventDefault();
+    dispatch(filterByCreated(e.target.value));
     setPage(1);
     history.push('/home');
   }
 
   //default
-  const handleByDefault = (e)=>{
-    // e.preventDefault();
+  const handleByDefault = ()=>{
     dispatch(getAllPokemons());
     setPage(1);
-    history.push('/home');
+    history.push('/home')
   }
   
   
@@ -78,19 +82,24 @@ const Home = () => {
                   <div className={s.selectContainer}>
                     <select className={s.orderSelect} >
                       <option className={s.orderOption} value="Order by" autoFocus selected disabled>Order By</option>
-                      <option className={s.orderOption} value="default" onClick={handleByDefault}>Default</option>
+                      <option className={s.orderOption} value="default" onClick={()=> handleByDefault()}>Default</option>
                       <option className={s.orderOption} value="asc" onClick={(e)=>handleByName(e)}>Name ↑</option>
                       <option className={s.orderOption} value="desc" onClick={(e)=>handleByName(e)}>Name ↓</option>
                       <option className={s.orderOption} value="attackAsc" onClick={(e)=>handleByAttack(e)}>Attack ↑</option>
                       <option className={s.orderOption} value="attackDesc" onClick={(e)=>handleByAttack(e)}>Attack ↓</option>
                     </select>
-                  <select className={s.orderSelect}>
-                      <option defaultValue="Filter by" selected disabled>Filter By</option>
+                  <select className={s.orderSelect}  >
+                      <option selected disabled>Types</option>
                       {!allTypes.length > 0 ? null : allTypes.map(t=> (
                           <option key={t.id} value={t.name} onClick={(e)=>handleFilterType(e)}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
                       ))}
                   </select>
-                  <option className={s.resetFilters} value="default" onClick={handleByDefault}>Clear Filter</option>
+                  <select className={s.orderSelect}  >
+                    <option className={s.orderOption} selected onClick={handleByCreated}>Filter By</option>
+                    <option className={s.orderOption} value="created" onClick={handleByCreated}>Created</option>
+                    <option className={s.orderOption} value="api" onClick={handleByCreated}>Pokemons</option>
+                  </select>
+                  <option className={s.resetFilters} value="default" onClick={()=> handleByDefault()}>All Pokemons</option>
                   </div>
               </div>
             }
@@ -111,9 +120,7 @@ const Home = () => {
           )  : <Loading />}
       </div>
             <div className={s.pagination}>
-              {/* <button >&lt;</button> */}
-                <Pagination showPerPage={showPerPage}  allPokemons={allPokemons.length} pagination={pagination}/>
-              {/* <button>&gt;</button> */}
+                <Pagination showPerPage={showPerPage}  allPokemons={allPokemons.length} pagination={pagination} setPage={setPage} page={page}/>
             </div>
     </div>
   )
