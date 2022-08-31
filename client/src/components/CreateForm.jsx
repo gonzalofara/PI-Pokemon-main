@@ -24,10 +24,16 @@ const CreateForm = () => {
         });
     }
 
-    const handleSelectChange = (e) =>{
+    const handleSelectChange1 = (e) =>{
         setInput({ 
             ...input,
-            types: [e.target.value]
+            type1: e.target.value
+        });
+    }
+    const handleSelectChange2 = (e) =>{
+        setInput({ 
+            ...input,
+            type2: e.target.value
         });
     }
 
@@ -48,13 +54,13 @@ const CreateForm = () => {
                 <label>Name</label>
                 <input type="text" name="name" required onChange={handleChange}/>
             </div>
-                <select className={s.selector}  onChange={handleSelectChange}>
+                <select className={s.selector}  onChange={handleSelectChange1}>
                     <option value hidden >Pokemon Type</option>
                         {types && types.map(t => 
                                 <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
                         )}
                 </select>
-                <select className={s.selector} onChange={handleSelectChange}>
+                <select className={s.selector} onChange={handleSelectChange2}>
                     <option value hidden >Pokemon Type</option>
                         {types && types.map(t => 
                                 <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>

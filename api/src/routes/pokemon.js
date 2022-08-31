@@ -6,18 +6,24 @@ const { Op } = require('sequelize');
 
 router.post('/', async (req, res) => {
 
-    const {name, health, attack, defense, speed, height, weight, image} = req.body;
-    let {types} = req.body;
-    console.log(types)
-    !types ? types = ['unknown'] : null;
+    const {name, health, attack, defense, speed, height, weight, image, type1, type2} = req.body;
+    let types = []
+    if(!type1){
+        types = ['unknown']
+    } else if (type1 && !type2){
+        types = [type1]
+    } else {
+        types = [type1, type2]
+    }
     
 
     try {
 
+        
         const exists = await Pokemon.findOne({ where: { name: name.trim().toLowerCase()}})
         if(exists) return res.status(400).send(`Ya existe un Pokemon con ese nombre`);
 
-        const newPokemon = await Pokemon.create({
+        let newPokemon = await Pokemon.create({
             name: name.trim().toLowerCase(), health, attack, defense, speed, height, weight, image
         });
 
@@ -25,7 +31,14 @@ router.post('/', async (req, res) => {
             types.map(t => Type.findOne({ where: { name: t } }))
         )
       
-          newPokemon.setTypes(assignTypes);
+        newPokemon.setTypes(assignTypes);
+        
+
+        // let assignTypes = await Promise.all(
+        //     types.map(t => Type.findOne({ where: { name: t } }))
+        // )
+      
+        //   newPokemon.addTypes(assignTypes);
         // console.log(newPokemon.toJSON());
 
         //201 -> Created
