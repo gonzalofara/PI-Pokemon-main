@@ -8,11 +8,13 @@ router.post('/', async (req, res) => {
 
     const {name, health, attack, defense, speed, height, weight, image, type1, type2} = req.body;
     let types = []
-    if(!type1){
+    if(!type1 && !type2) {
         types = ['unknown']
     } else if (type1 && !type2){
         types = [type1]
-    } else {
+    } else if(type2 && !type1){
+        types = [type2]
+    }else {
         types = [type1, type2]
     }
     
