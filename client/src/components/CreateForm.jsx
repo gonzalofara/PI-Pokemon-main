@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {createPokemon, getPokemonTypes} from '../redux/actions/actions';
-import s from './CreateForm.module.css'
+import s from './CreateForm.module.css';
 
 const CreateForm = () => {
 
@@ -57,14 +57,12 @@ const CreateForm = () => {
                 <select className={s.selector}  onChange={handleSelectChange1}>
                     <option value hidden >Pokemon Type</option>
                         {types && types.map(t => 
-                                <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
+                                <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)} </option>
                         )}
                 </select>
                 <select className={s.selector} onChange={handleSelectChange2}>
                     <option value hidden >Pokemon Type</option>
-                        {types && types.map(t => 
-                                <option key={t.id} value={t.name}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
-                        )}
+                        {types && types.filter(t => t.name !== input.type1 ).map(filtered => <option key={filtered.id} value={filtered.name}>{filtered.name.charAt(0).toUpperCase() + filtered.name.substring(1)}</option>)}
                 </select>
                 <label for='image' className={s.labelImage}>Pokemon Image
                     <input id='image'type="file" className={s.image} accept=".png, .jpg, .jpeg"/>
