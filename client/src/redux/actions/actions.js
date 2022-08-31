@@ -17,9 +17,10 @@ export const RESET_FILTER = 'RESET_FILTER';
 
 export const getAllPokemons = () => {
     try {
-        return function(dispatch) {
-            return axios.get('http://localhost:3001/pokemons')
-                .then(json => dispatch({ type: GET_ALL_POKEMONS, payload: json.data}))
+        return async function(dispatch) {
+            return fetch('http://localhost:3001/pokemons')
+                .then(res => res.json())
+                .then(data => dispatch({ type: GET_ALL_POKEMONS, payload: data}))
         }
     } catch (error) {
         return 'Ha ocurrido un error. Intenta recargando la Página.'

@@ -81,7 +81,7 @@ const Home = () => {
                   <Link to='/create' className={s.create}></Link>
                   <div className={s.selectContainer}>
                     <select className={s.orderSelect} >
-                      <option className={s.orderOption} value="Order by" autoFocus selected disabled>Order By</option>
+                      <option className={s.orderOption} value="Order by" hidden>Order By</option>
                       <option className={s.orderOption} value="default" onClick={()=> handleByDefault()}>Default</option>
                       <option className={s.orderOption} value="asc" onClick={(e)=>handleByName(e)}>Name ↑</option>
                       <option className={s.orderOption} value="desc" onClick={(e)=>handleByName(e)}>Name ↓</option>
@@ -89,7 +89,7 @@ const Home = () => {
                       <option className={s.orderOption} value="attackDesc" onClick={(e)=>handleByAttack(e)}>Attack ↓</option>
                     </select>
                   <select className={s.orderSelect}  >
-                      <option selected disabled>Types</option>
+                      <option hidden>Types</option>
                       {!allTypes.length > 0 ? null : allTypes.map(t=> (
                           <option key={t.id} value={t.name} onClick={(e)=>handleFilterType(e)}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
                       ))}

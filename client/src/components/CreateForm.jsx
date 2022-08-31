@@ -10,7 +10,7 @@ const CreateForm = () => {
     let types = useSelector(state => state.types);
     const dispatch = useDispatch();
     const history = useHistory();
-    let typesSelected = [];
+    
 
     useEffect(()=> {
         dispatch(getPokemonTypes())   

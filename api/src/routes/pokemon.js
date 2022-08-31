@@ -8,7 +8,8 @@ router.post('/', async (req, res) => {
 
     const {name, health, attack, defense, speed, height, weight, image} = req.body;
     let {types} = req.body;
-    !types ? types = ['unknown'] : [...types];
+    console.log(types)
+    !types ? types = ['unknown'] : null;
     
 
     try {
@@ -37,9 +38,92 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
 
     const {name} = req.query;
+    
+    try {
+        if(!name){
+            let dbPokemons = await Pokemon.findAll({include: Type});
+            dbPokemons = dbPokemons.map(p => {
+                return {
+                    id: p.id,
+                    name: p.name.trim().toLowerCase().charAt(0).toUpperCase() + p.name.substring(1),
+                    health: p.health,
+                    attack: p.attack,
+                    defense: p.defense,
+                    speed: p.speed,
+                    height: p.height,
+                    weight: p.weight,
+                    types: p.Types.map(t => t.name),
+                    image: p.image
+                }
+            });
+            
+            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40&offset=0');
+            apiPromise = apiPromise.data.results?.map(pokemon => axios.get(pokemon.url));
 
-   
-        try {
+            const responsePromise = await axios.all(apiPromise);
+            const apiPokemons = responsePromise.map(p => {
+                return {
+                    id: p.data.id,
+                    name: p.data.name,
+                    health: p.data.stats[0].base_stat,
+                    attack: p.data.stats[1].base_stat,
+                    defense: p.data.stats[2].base_stat,
+                    speed: p.data.stats[5].base_stat,
+                    height: p.data.height,
+                    weight: p.data.weight,
+                    types: p.data.types.map(t => t.type.name),
+                    image: p.data.sprites.other.home.front_default
+                }
+            });
+
+            let allPokemons = apiPokemons.concat(dbPokemons);
+            res.status(200).json(allPokemons)
+        } else {
+
+            let pokeByNameDB = await Pokemon.findAll({
+                where: {name : {[Op.iLike]: `%${name}%`}},
+                include: {model: Type, attributes: ['name']}
+            })
+            let dbPokemon = pokeByNameDB.map(p => {
+                return {
+                    id: p.id,
+                    name: p.name.trim().toLowerCase().charAt(0).toUpperCase() + p.name.substring(1),
+                    health: p.health,
+                    attack: p.attack,
+                    defense: p.defense,
+                    speed: p.speed,
+                    height: p.height,
+                    weight: p.weight,
+                    types: p.Types.map(t => t.name),
+                    image: p.image
+                }
+            });
+
+            if(dbPokemon.length > 0) {
+                return res.status(200).json(...dbPokemon)
+            } else {
+                let pokeByNameAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`)
+                let pokeApiName = {
+                    id: pokeByNameAPI.data.id,
+                    name: pokeByNameAPI.data.name,
+                    health: pokeByNameAPI.data.stats[0].base_stat,
+                    attack: pokeByNameAPI.data.stats[1].base_stat,
+                    defense: pokeByNameAPI.data.stats[2].base_stat,
+                    speed: pokeByNameAPI.data.stats[5].base_stat,
+                    height: pokeByNameAPI.data.height,
+                    weight: pokeByNameAPI.data.weight,
+                    types: pokeByNameAPI.data.types.map(t => t.type.name),
+                    image: pokeByNameAPI.data.sprites.other.home.front_default
+                }
+
+                if(pokeApiName.name) return res.status(200).json(pokeApiName);
+                res.status(404).send('Not found')
+            }
+        }
+    } catch (error) {
+        return res.status(404).send(error.message)
+    }
+     /*    try {
 
             let dbPokemons = await Pokemon.findAll({include: Type});
             dbPokemons = dbPokemons.map(p => {
@@ -93,7 +177,7 @@ router.get('/', async (req, res) => {
         }
   
         
-        
+         */
 
 });
 
