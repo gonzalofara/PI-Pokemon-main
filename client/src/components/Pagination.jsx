@@ -15,7 +15,7 @@ const Pagination = ({showPerPage, allPokemons, pagination, page}) => {
   return (
     //DEVOLVES / RENDERIZAS TODO EL HTML
     <div className={s.btnContainer}>
-        <button className={s.btn} onClick={page > 1 ? ()=>pagination(page - 1) : null} >&lt;</button>
+        <button className={s.btn} onClick={page > 1 ?  ()=>pagination(page - 1) : null} >&lt;</button>
         {pageNumbers && pageNumbers.map(n => 
                 <button key={n} className={page !== n ? s.btn : s.current} onClick={()=> pagination(n)} >{n}</button>
             )

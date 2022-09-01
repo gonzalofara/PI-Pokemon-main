@@ -24,7 +24,8 @@ const Home = () => {
   const shownPokemons = allPokemons.slice(firstOnPage, lastOnPage);
   
   function pagination(pageNumber){
-    return setPage(pageNumber)
+    window.scrollTo(0,0)
+    setPage(pageNumber)
   }
 
 
