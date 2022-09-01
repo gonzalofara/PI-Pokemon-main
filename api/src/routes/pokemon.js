@@ -7,6 +7,8 @@ const { Op } = require('sequelize');
 router.post('/', async (req, res) => {
 
     const {name, health, attack, defense, speed, height, weight, image, type1, type2} = req.body;
+    
+    if(!name || name.trim() === '') res.status(400).send('El nombre es requerido')
     let types = []
     if(!type1 && !type2) {
         types = ['unknown']

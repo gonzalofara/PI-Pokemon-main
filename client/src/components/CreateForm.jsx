@@ -2,12 +2,21 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {createPokemon, getPokemonTypes} from '../redux/actions/actions';
-import validate from '../validator/validate.js';
 import s from './CreateForm.module.css';
 
 const CreateForm = () => {
 
-    const [input, setInput] = useState({});
+    const [input, setInput] = useState({
+        name: '',
+        health: 0,
+        attack: 0,
+        defense: 0,
+        speed: 0,
+        height: 0,
+        weight: 0,
+        type1: '',
+        type2: ''
+    });
     const [errors, setErrors] = useState({});
 
     let types = useSelector(state => state.types);
@@ -19,33 +28,17 @@ const CreateForm = () => {
     }, [dispatch])
 
     function validate (input) {
-        let errors = {};
-        if(!input.name){
-            errors.name = "Name is required";
-        }
-        else if(/^[a-zA-Z]+$/.test(input.name) === -1){
-            errors.name = "Name is invalid. Only accept letters"
-        } 
-        else if (!input.type1 && !input.type2){
-            errors.type1 = 'At least a Pokemon Type is required'
-        }
-        else if (/^[0-9]+$/.test(input.attack) === -1){
-            errors.attack = 'Attack must be a Number'
-        }
-        else if (/^[0-9]+$/.test(input.defense) === -1){
-            errors.defense = 'Defense must be a Number'
-        }
-        else if (/^[0-9]+$/.test(input.health) === -1){
-            errors.health = 'HP must be a Number'
-        }
-        else if (/^[0-9]+$/.test(input.height) === -1){
-            errors.height = 'Height must be a Number'
-        }
-        else if (/^[0-9]+$/.test(input.weight) === -1){
-            errors.weight = 'Weight must be a Number'
-        }
-
-        return errors
+        let errors = {}
+        if (!input.name.trim()) {
+            errors.name = "Nombre requrido";
+          }
+          if (input.name.search("[0-9]") !== -1) {
+            errors.name = "El Nombre no puede tener numeros";
+          }
+          if (input.name.search("[^A-Za-z0-9]") !== -1) {
+            errors.name = "El Nombre no puede tener simbolos, ni espacios*";
+          }
+        return errors;
     }
 
     const handleChange = (e) =>{
@@ -64,10 +57,6 @@ const CreateForm = () => {
             ...input,
             type1: e.target.value
         });
-        setErrors(validate({
-            ...input,
-            [e.target.name]: e.target.value
-        }))
     }
     const handleSelectChange2 = (e) =>{
         setInput({ 
@@ -78,14 +67,13 @@ const CreateForm = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        if(!errors.name && !errors.type1 && !errors.health && !errors.attack && !errors.defense && !errors.height && !errors.weight ){
+        if(!errors.name){
             dispatch(createPokemon(input))
-            alert("Pokemon creado correctamente")
+            alert("Pokemon has been created")
             setInput({})
-            history.push('/home')
+            history.push('/home') 
         }
-        alert('Check input values')
-        
+        alert('Name is required')
     }
 
   return (
@@ -95,6 +83,9 @@ const CreateForm = () => {
             <div className={s.nameInput}>
                 <label>Name</label>
                 <input type="text" name="name" required onChange={handleChange}/>
+                <div className={s.errorContainer}>
+                <label hidden={errors.name?false:true} className={s.required}>{errors.name}</label>
+                </div>
             </div>
                 <select className={s.selector}  onChange={handleSelectChange1}>
                     <option value hidden >Pokemon Type</option>
@@ -143,7 +134,7 @@ const CreateForm = () => {
             </div>
                 <button className={s.btn} type="submit">Create</button>
         </div>
-
+       
     </form>
   )
 }

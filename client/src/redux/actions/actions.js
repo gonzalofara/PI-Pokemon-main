@@ -108,6 +108,7 @@ export const resetFilter = () =>{
     return {type: RESET_FILTER}
 }
 
+
 //PRUEBA GET_ALL_POKEMONS
 //   const getAllPokemons = async () => {
 //     try {

@@ -146,3 +146,16 @@
     box-shadow: 0 0 10px rgba(253, 0, 0, 0.37);;
     transition: all 0.7s ease-in-out;
 }
+
+
+
+.required {
+    font-weight: normal;
+    
+    color: white;
+}
+.errorContainer {
+    width: 100px;
+    background-color: rgb(255, 1, 1);
+    border-radius: 10px;
+}
