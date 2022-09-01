@@ -29,13 +29,14 @@ export const getAllPokemons = () => {
 };
 
 export const getPokemonByName = (name) => {
-    try {
-        return function(dispatch) {
-            return axios.get(`http://localhost:3001/pokemons?name=${name}`)
+    return async function(dispatch) {
+        try {
+            axios.get(`http://localhost:3001/pokemons?name=${name}`)
                 .then(json => dispatch({type: GET_POKEMON_NAME, payload: json.data}))
+            
+        } catch (error) {
+            return 'Ha ocurrido un error, intenta nuevamente.'
         }
-    } catch (error) {
-        return 'Ha ocurrido un error, intenta nuevamente.'
     }
 }; 
 

@@ -5,6 +5,7 @@ const initialState = {
     types: [],
     pokemon: {},
     newPokemon: {},
+    error: ''
 }
 
 const rootReducer = (state = initialState, action) => {

@@ -14,8 +14,13 @@
 
 }
 
-.btn:focus {
+.current {
     background-color: gold;
+    border: 1px solid gold;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
 }
 
 .btn:hover:not(:focus){
