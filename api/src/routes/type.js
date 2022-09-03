@@ -29,5 +29,30 @@ router.get('/', async (req,res) => {
 
 });
 
+router.post('/typecreate', async(req, res) => {
+
+    try {
+        const {name} = req.body;
+    if(!name) res.status(400).send('Type Name is required')
+
+    let exists = await Type.findOne({
+        where: {name: name}
+    })
+
+    if(exists) res.status(400).send('Pokemon already exists')
+
+    let newType = await Type.create({
+        name: name
+    })
+
+    if(newType) res.status(200).json(newType)
+
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+
+
+})
+
 
 module.exports = router;

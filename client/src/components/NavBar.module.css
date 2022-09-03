@@ -1,0 +1,105 @@
+.order_search {
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    width: 95%;
+    margin: 0 auto;
+}
+.title {
+    width: 120px;
+    margin: 0 auto;
+}
+.title:hover {
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+.selectContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.orders select {
+    /* padding: 5px; */
+    background-color: transparent;
+    border: none;
+    color: rgba(177, 177, 177, 0.801);
+    /* overflow: hidden; */
+}
+
+select:hover{
+    cursor: pointer;
+    color: rgba(177, 177, 177, 0.801);
+}
+select:focus{
+    color:rgba(177, 177, 177, 0.801);
+    background-color:transparent;
+    
+}
+option {
+    background-color:transparent;
+}
+
+.options {
+    background-color: black;
+    color:red;
+}
+
+
+.create {
+    background: url('../resources/createBtn.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100px;
+    width: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 156px auto;
+    /* color:white; */
+}
+
+.create:hover {
+    transform: scale(1.1);
+}
+
+.orderSelect{
+    background-color:transparent;
+    border: none;
+    font-weight: 600;
+    color: white;
+    /* border-bottom: 2px solid white; */
+    /* padding: 5px; */
+    width: 90px;
+}
+
+
+.resetFilters{
+    font-weight: 600;
+    /* font-size: 20px; */
+    color: rgba(177, 177, 177, 0.801);
+    /* align-self: flex-start; */
+}
+.resetFilters:hover{
+    cursor: pointer;
+    /* font-size: 20px; */
+    /* font-weight: bold; */
+    color:white;
+
+}
+

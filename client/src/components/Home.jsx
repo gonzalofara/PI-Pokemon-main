@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Link, useHistory} from 'react-router-dom';
-import {getAllPokemons, getPokemonTypes, orderByName, orderByAttack, filterByType, filterByCreated} from '../redux/actions/actions';
+// import {Link, useHistory} from 'react-router-dom';
+import {getAllPokemons, getPokemonTypes} from '../redux/actions/actions';
 import Card from './Card.jsx';
 import Loading from './Loading';
-import SearchBar from './SearchBar';
 import Pagination from './Pagination'
+import NavBar from './NavBar'
 import s from './Home.module.css'
 
 
@@ -15,7 +15,7 @@ const Home = () => {
   let allPokemons = useSelector((state) => state.pokemons);
   let allTypes = useSelector((state) => state.types);
   const dispatch = useDispatch()
-  let history = useHistory();
+  // let history = useHistory();
   //paginación
   const [page, setPage] = useState(1);
   const showPerPage = 12;
@@ -28,87 +28,23 @@ const Home = () => {
     setPage(pageNumber)
   }
 
-
   //acciones
   useEffect(()=> {
     dispatch(getAllPokemons());
     dispatch(getPokemonTypes());
   }, [dispatch])
-
-
-  //ordenamientos
-  const handleByName = (e)=>{
-    // e.preventDefault();
-    dispatch(orderByName(e.target.value));
-    setPage(1);
-    history.push('/home');
-  }
-  const handleByAttack = (e)=>{
-    // e.preventDefault();
-    dispatch(orderByAttack(e.target.value));
-    setPage(1);
-    history.push('/home');
-  }
-
-  //filtrados
-  const handleFilterType = (e)=>{
-    dispatch(filterByType(e.target.value));
-    setPage(1);
-    history.push('/home');
-  }
-  const handleByCreated = (e)=>{
-    // e.preventDefault();
-    dispatch(filterByCreated(e.target.value));
-    setPage(1);
-    history.push('/home');
-  }
-
-  //default
-  const handleByDefault = ()=>{
-    dispatch(getAllPokemons());
-    setPage(1);
-    history.push('/home')
-  }
   
-  
+
   return (
     <div className={s.container}>
       
       <div className={s.title_nav}>
-        <div className={s.title}></div>
-            {!shownPokemons.length > 0 ? null :
-              <div className={s.order_search}>
-                  <SearchBar />
-                  <Link to='/create' className={s.create}></Link>
-                  <div className={s.selectContainer}>
-                    <select className={s.orderSelect} >
-                      <option className={s.orderOption} value="Order by" hidden>Order By</option>
-                      <option className={s.orderOption} value="default" onClick={()=> handleByDefault()}>Default</option>
-                      <option className={s.orderOption} value="asc" onClick={(e)=>handleByName(e)}>Name ↑</option>
-                      <option className={s.orderOption} value="desc" onClick={(e)=>handleByName(e)}>Name ↓</option>
-                      <option className={s.orderOption} value="attackAsc" onClick={(e)=>handleByAttack(e)}>Attack ↑</option>
-                      <option className={s.orderOption} value="attackDesc" onClick={(e)=>handleByAttack(e)}>Attack ↓</option>
-                    </select>
-                  <select className={s.orderSelect}  >
-                      <option hidden>Types</option>
-                      {!allTypes.length > 0 ? null : allTypes.map(t=> (
-                          <option key={t.id} value={t.name} onClick={(e)=>handleFilterType(e)}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
-                      ))}
-                  </select>
-                  <select className={s.orderSelect}  >
-                    <option className={s.orderOption} selected onClick={handleByCreated}>Filter By</option>
-                    <option className={s.orderOption} value="created" onClick={handleByCreated}>Created</option>
-                    <option className={s.orderOption} value="api" onClick={handleByCreated}>Pokemons</option>
-                  </select>
-                  <option className={s.resetFilters} value="default" onClick={()=> handleByDefault()}>All Pokemons</option>
-                  </div>
-              </div>
-            }
+        {!shownPokemons.length > 0 ? null : <NavBar allTypes={allTypes} setPage={setPage} shownPokemons={shownPokemons}/>}
       </div>
+      
         <div className={s.cardsContainer}>
           {shownPokemons.length > 0  ?  shownPokemons.map(p => 
             (
-              // <div  key={p.id}>
                 <Card 
                   key={p.id}
                   id={p.id}
@@ -116,13 +52,15 @@ const Home = () => {
                   types={p.types}
                   image={p.image} 
                 />
-              // </div>
             )
           )  : <Loading />}
       </div>
-            <div className={s.pagination}>
+         
+           {!shownPokemons.length > 0 ? null : 
+             <div className={s.pagination}>
                 <Pagination showPerPage={showPerPage}  allPokemons={allPokemons.length} pagination={pagination} page={page}/>
-            </div>
+            </div>}
+          
     </div>
   )
 }

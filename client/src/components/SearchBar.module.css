@@ -1,63 +1,28 @@
 
 
 .input {
-    width: 80%;
-    border: 1px solid #e20f0fcc;
-    padding: 5px;
+    width: 90%;
+    border: 1px solid rgb(155, 138, 27);
+    padding: 7px;
     font-size: 16px;
-    font-weight: bold;
     letter-spacing: 1px;
     outline: none;
     border-radius: 5px;
     transition: all .5s ease-in-out;
     background-color: transparent;
-    color:#fff;
+    color:rgba(255, 255, 255, 0.349);
 }
 
-.input:hover {  
-    
-}
 
-.input::placeholder{
-    /* color:white; */
-    letter-spacing: 1px;
-    font-weight: bold;
-  }
 .input:focus{
     color: white;
     background-color: transparent;
     border-radius: 0px;
     border:none;
-    border-bottom:1px solid rgba(255, 255, 255, 0.884);
+    border-bottom:1px solid rgba(155, 138, 27, 0.685);
     
 }
 .input:focus::placeholder{
-    /* color:transparent; */
-    font-size: 16px;
-    /* letter-spacing: 2px; */
-    /* font-weight: 800; */
-    /* text-align: center; */
+    color: transparent;
   }
-
-/* .btn {
-    background-color: rgba(61, 29, 204, 0.685);
-    border:none;
-    border-radius: 5px;
-    color: white;
-    margin: 5px;
-    padding: 5px; 
-} */
- 
-/* .input:focus{
-    background-color: rgb(61, 29, 204);
-    border: none;
-    -webkit-appearance: none;
-} */
-
-
-/* .btn:hover {
-    background-color: rgb(61, 29, 204);
-    font-weight: bold;
-    cursor: pointer;
-} */
 

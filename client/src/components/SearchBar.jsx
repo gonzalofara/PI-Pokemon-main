@@ -21,12 +21,14 @@ const SearchBar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let matched = allPokemons.find(p => p.name === input);
-        if(matched){
+        if(matched.image){
             dispatch(getPokemonByName(input));
             history.push(`/pokemon/${input}`);
             setInput('');
-        } 
-        alert('Pokemon name not matched');
+        } else if(!matched){
+            alert('Pokemon name not matched');
+            setInput('');
+        }
     }
 
   return (
