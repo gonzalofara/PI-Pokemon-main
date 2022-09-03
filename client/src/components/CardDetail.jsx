@@ -35,32 +35,25 @@ const CardDetail = (props) => {
 
                         <p className={s.data}><span className={s.span}>Hp: </span> {pokemon.health}</p>
 
-
                         <p className={s.data}><span className={s.span}>Attack: </span> {pokemon.attack}</p>
-
 
                         <p className={s.data}><span className={s.span}>Defense: </span> {pokemon.defense}</p>
 
-
                         <p className={s.data}><span className={s.span}>Speed: </span> {pokemon.speed}</p>
-
 
                         <p className={s.data}><span className={s.span}>Height: </span> {pokemon.height}</p>
 
-
                         <p className={s.data}><span className={s.span}>Weight: </span> {pokemon.weight}</p>
 
+                        <p className={s.types}>{pokemon.types?.join(' - ')}</p>
                 </div>
-                <div>
-                {/* <img className={s.typeicons} src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Pok%C3%A9mon_Bug_Type_Icon.svg" alt="bug-icon" /> */}
 
-                   <p className={s.types}>{pokemon.types?.join(' - ')}</p>
-                </div>
 
             </div>
+            <Link to="/home" onClick={()=> desmontar()}><button className={s.btnPokemon}>Home</button></Link>
         </div>
         : <Loading/> }
-        <Link to="/home" onClick={()=> desmontar()}><button className={s.btnPokemon}>Home</button></Link>
+        
 
 
     </div>

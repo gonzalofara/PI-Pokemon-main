@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchBar from './SearchBar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
 import {getAllPokemons, orderByName, orderByAttack, filterByType, filterByCreated} from '../redux/actions/actions';
 import title from '../resources/pokeball-home.png' 
