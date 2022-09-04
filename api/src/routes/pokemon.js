@@ -74,7 +74,7 @@ router.get('/', async (req, res) => {
                 }
             });
             
-            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=84&offset=0');
+            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=120&offset=0');
             apiPromise = apiPromise.data.results?.map(pokemon => axios.get(pokemon.url));
 
             const responsePromise = await axios.all(apiPromise);
