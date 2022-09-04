@@ -53,7 +53,7 @@ const Home = () => {
                   image={p.image} 
                 />
             )
-          )  : <Loading />}
+          )  : <Loading className={s.loader}/>}
       </div>
          
            {!shownPokemons.length > 0 ? null : 

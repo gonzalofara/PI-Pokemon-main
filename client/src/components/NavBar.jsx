@@ -19,12 +19,14 @@ const NavBar = ({setPage, allTypes, shownPokemons}) => {
     dispatch(orderByName(e.target.value));
     setPage(1);
     history.push('/home');
+ 
   }
   const handleByAttack = (e)=>{
     // e.preventDefault();
     dispatch(orderByAttack(e.target.value));
     setPage(1);
     history.push('/home');
+
   }
 
   //filtrados
@@ -32,16 +34,18 @@ const NavBar = ({setPage, allTypes, shownPokemons}) => {
     dispatch(filterByType(e.target.value));
     setPage(1);
     history.push('/home');
+
   }
   const handleByCreated = (e)=>{
     // e.preventDefault();
     dispatch(filterByCreated(e.target.value));
     setPage(1);
     history.push('/home');
+    
   }
  //default
  const handleByDefault = ()=>{
-    dispatch(getAllPokemons());
+    dispatch(getAllPokemons())
     setPage(1);
     history.push('/home')
   }

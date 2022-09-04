@@ -2,7 +2,7 @@
 
 
 .container {
-position: relative;
+/* position: relative; */
 background-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.877) 50%, rgba(0,0,0,1) 100%);
 width: 100%;
 height: 100%;
@@ -39,9 +39,3 @@ margin: 0 auto;
     position: static;
 }
 
-.loader {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-}

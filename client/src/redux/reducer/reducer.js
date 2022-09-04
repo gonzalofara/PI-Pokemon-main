@@ -5,6 +5,7 @@ const initialState = {
     types: [],
     pokemon: {},
     newPokemon: {},
+    filters: [],
     error: ''
 }
 
@@ -89,6 +90,11 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     pokemons: api
                 }
+            } else if(action.payload === 'default'){
+                return {
+                    ...state,
+                    pokemons: state.pokemons
+                }
             } 
         break    
             
@@ -100,7 +106,7 @@ const rootReducer = (state = initialState, action) => {
         case RESET_FILTER:
             return {
                 ...state,
-                pokemons : [],
+                pokemons: state.pokemons
             }
         default: return state
     }
