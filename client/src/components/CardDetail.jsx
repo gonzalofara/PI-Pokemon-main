@@ -61,7 +61,7 @@ const CardDetail = (props) => {
             <div className={s.types}>
                 <div className={s.type}>
                     <p className={s.type1}>{pokemon.types[0]? pokemon.types[0] : null}</p>
-                    <img src={(pokemon.types[0] ==='bug') ? bug : (pokemon.types[0]==='dark') ? dark : (pokemon.types[0]==='dragon') ? dragon : (pokemon.types[0]==='electric') ? electric : (pokemon.types[0]==='fairy') ? fairy : ( pokemon.types[0]==='fighting') ? fighting : (pokemon.types[0]==='fire') ? fire : (pokemon.types[0]==='flying') ? flying : (pokemon.types[0]==='ghost') ? ghost : (pokemon.types[0]==='grass') ? grass : (pokemon.types[0]==='ground') ? ground : (pokemon.types[0]==='ice') ? ice :( pokemon.types[0]==='normal') ? normal : (pokemon.types[0]==='poison') ? poison : (pokemon.types[0]==='psychic') ? psychic : (pokemon.types[0]==='rock') ? rock : (pokemon.types[0]==='steel') ? steel : (pokemon.types[0]==='water') ? water : (pokemon.types[1]==='unknown') ? unknown : null} alt='type-icon' className={s.typeicons}></img>
+                    <img src={(pokemon.types[0] ==='bug') ? bug : (pokemon.types[0]==='dark') ? dark : (pokemon.types[0]==='dragon') ? dragon : (pokemon.types[0]==='electric') ? electric : (pokemon.types[0]==='fairy') ? fairy : ( pokemon.types[0]==='fighting') ? fighting : (pokemon.types[0]==='fire') ? fire : (pokemon.types[0]==='flying') ? flying : (pokemon.types[0]==='ghost') ? ghost : (pokemon.types[0]==='grass') ? grass : (pokemon.types[0]==='ground') ? ground : (pokemon.types[0]==='ice') ? ice :( pokemon.types[0]==='normal') ? normal : (pokemon.types[0]==='poison') ? poison : (pokemon.types[0]==='psychic') ? psychic : (pokemon.types[0]==='rock') ? rock : (pokemon.types[0]==='steel') ? steel : (pokemon.types[0]==='water') ? water : (pokemon.types[0]==='unknown') ? unknown : null} alt='' className={s.typeicons}></img>
                 </div>
                                 
                 <div className={s.type}>
@@ -71,7 +71,7 @@ const CardDetail = (props) => {
             </div>
             <div className={s.gifs}>
                 {/* {gifAssignment(pokemon.name)} */}
-                <img className={s.pokegif} src={require(`../resources/gifs/${pokemon.name}.gif`)} alt="gif" />   
+                <img className={s.pokegif} src={idParam.length < 4 || typeof pokemon.id === 'number' ? require(`../resources/gifs/${pokemon.name}.gif`) : require(`../resources/gifs/created.gif`)} alt="gif" />   
             </div>
             <div className={s.detailContainer}>
                 <p className={s.data}><span className={s.span}>Hp</span>{pokemon.health}</p>

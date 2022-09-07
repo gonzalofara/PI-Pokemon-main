@@ -6,8 +6,10 @@ const { Op } = require('sequelize');
 
 router.post('/', async (req, res) => {
 
-    const {name, health, attack, defense, speed, height, weight, image, type1, type2} = req.body;
-    
+    const {health, attack, defense, speed, height, weight, image, type1, type2} = req.body;
+    let {name} = req.body
+    name.toLowerCase();
+
     if(!name || name.trim() === '') res.status(400).send('El nombre es requerido')
     let types = []
     if(!type1 && !type2) {
@@ -74,7 +76,7 @@ router.get('/', async (req, res) => {
                 }
             });
             
-            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=120&offset=0');
+            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=24&offset=0');
             apiPromise = apiPromise.data.results?.map(pokemon => axios.get(pokemon.url));
 
             const responsePromise = await axios.all(apiPromise);
@@ -140,61 +142,6 @@ router.get('/', async (req, res) => {
     } catch (error) {
         return res.status(404).send(error.message)
     }
-     /*    try {
-
-            let dbPokemons = await Pokemon.findAll({include: Type});
-            dbPokemons = dbPokemons.map(p => {
-                return {
-                    id: p.id,
-                    name: p.name.trim().toLowerCase().charAt(0).toUpperCase() + p.name.substring(1),
-                    health: p.health,
-                    attack: p.attack,
-                    defense: p.defense,
-                    speed: p.speed,
-                    height: p.height,
-                    weight: p.weight,
-                    types: p.Types.map(t => t.name),
-                    image: p.image
-                }
-            });
-            
-            let apiPromise = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40&offset=0');
-            apiPromise = apiPromise.data.results?.map(pokemon => axios.get(pokemon.url));
-
-            const responsePromise = await axios.all(apiPromise);
-            const apiPokemons = responsePromise.map(p => {
-                return {
-                    id: p.data.id,
-                    name: p.data.name,
-                    health: p.data.stats[0].base_stat,
-                    attack: p.data.stats[1].base_stat,
-                    defense: p.data.stats[2].base_stat,
-                    speed: p.data.stats[5].base_stat,
-                    height: p.data.height,
-                    weight: p.data.weight,
-                    types: p.data.types.map(t => t.type.name),
-                    image: p.data.sprites.other.home.front_default
-                }
-            });
-
-            let allPokemons = apiPokemons.concat(dbPokemons);
-            if(name) {
-                let byName = allPokemons.find(p => p.name.toLowerCase() === name.toLowerCase());
-                
-
-                console.log(byName)
-                byName ? res.status(200).json(byName) : res.status(404).send('Pokemons not found');
-            } else {
-
-                return res.status(200).json(allPokemons);
-            }
-
-        } catch (error) {
-            return res.status(404).send(error)
-        }
-  
-        
-         */
 
 });
 

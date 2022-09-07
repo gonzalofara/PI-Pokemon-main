@@ -1,5 +1,5 @@
  .divHome{
-    background-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(17, 17, 17) 50%, rgb(0,0,0) 100%);
+    background-image: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0,0,0) 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -9,11 +9,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-        /* flex-wrap: wrap;
-        flex-direction: column;
-        position: absolute; */
-    
-    
 } 
 
 .link {
@@ -40,9 +35,6 @@
     
 }
 
-.divTitle:hover ~ .divHome{
-    filter: brightness(50%);
-}
 
 
 

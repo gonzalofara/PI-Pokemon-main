@@ -40,8 +40,8 @@ module.exports = (sequelize) => {
       defaultValue: 25
     },
     image: {
-      type: DataTypes.TEXT,
-      defaultValue: "https://image.pngaaa.com/364/512364-middle.png"
+      type: DataTypes.STRING,
+      defaultValue: "https://www.pngmart.com/files/2/Pokeball-PNG-HD.png"
     }
   },
   {

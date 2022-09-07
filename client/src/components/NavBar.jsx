@@ -11,22 +11,21 @@ import s from './NavBar.module.css'
 const NavBar = ({setPage, allTypes, shownPokemons}) => {
 
     const dispatch = useDispatch()
-    let history = useHistory();
+    let history = useHistory(); 
     
     //ordenamientos
-  const handleByName = (e)=>{
+    const handleByName = (e)=>{
     // e.preventDefault();
     dispatch(orderByName(e.target.value));
     setPage(1);
     history.push('/home');
- 
   }
+
   const handleByAttack = (e)=>{
     // e.preventDefault();
     dispatch(orderByAttack(e.target.value));
     setPage(1);
     history.push('/home');
-
   }
 
   //filtrados
@@ -34,14 +33,12 @@ const NavBar = ({setPage, allTypes, shownPokemons}) => {
     dispatch(filterByType(e.target.value));
     setPage(1);
     history.push('/home');
-
   }
   const handleByCreated = (e)=>{
     // e.preventDefault();
     dispatch(filterByCreated(e.target.value));
     setPage(1);
     history.push('/home');
-    
   }
  //default
  const handleByDefault = ()=>{
@@ -58,7 +55,7 @@ const NavBar = ({setPage, allTypes, shownPokemons}) => {
           {/* <Link to='/create' className={s.create}></Link> */}
             <div className={s.selectContainer}>
               <select className={s.orderSelect} >
-                <option className={s.orderOption} value="" hidden>Order By</option>
+                <option className={s.orderOption} hidden value='order by'>Order By</option>
                 <option className={s.orderOption} value="default" onClick={()=> handleByDefault()}>Default</option>
                 <option className={s.orderOption} value="asc" onClick={(e)=>handleByName(e)}>Name ↑</option>
                 <option className={s.orderOption} value="desc" onClick={(e)=>handleByName(e)}>Name ↓</option>
@@ -67,14 +64,14 @@ const NavBar = ({setPage, allTypes, shownPokemons}) => {
               </select>
                   
                 <select className={s.orderSelect}  >
-                  <option hidden>Types</option>
+                  <option value="types"hidden>Types</option>
                     {!allTypes.length > 0 ? null : allTypes.map(t=> (
                       <option key={t.id} value={t.name} onClick={(e)=>handleFilterType(e)}>{t.name.charAt(0).toUpperCase() + t.name.substring(1)}</option>
                       ))}
                 </select>
                   
                 <select className={s.orderSelect}  >
-                  <option className={s.orderOption} disabled={true} >Filter By</option>
+                  <option className={s.orderOption} value="filter by" hidden >Filter By</option>
                   <option className={s.orderOption} value="created" onClick={handleByCreated}>Created</option>
                   <option className={s.orderOption} value="api" onClick={handleByCreated}>Pokemons</option>
                 </select>
